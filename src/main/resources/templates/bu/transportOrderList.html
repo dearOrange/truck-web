@@ -1,0 +1,106 @@
+<div class="layui-row layui-col-space10">
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-row">
+                <div class="layui-form layui-col-md12 my-search">
+                    <div class="layui-inline">
+                        <input class="layui-input" placeholder="接单日期" name="startDate" id="startDate">
+                    </div>
+                    <div class="layui-inline">
+                        <input class="layui-input" placeholder="反馈日期" name="endDate" id="endDate">
+                    </div>
+                    <div class="layui-inline">
+                        <input class="layui-input" placeholder="提货日期" name="startD" id="startD">
+                    </div>
+                    <div class="layui-inline">
+                        <input class="layui-input" placeholder="运抵日期" name="startD" id="sDate">
+                    </div>
+                    <div class="layui-inline">
+                        <input class="layui-input" placeholder="收货日期" name="endD" id="endD">
+                    </div>
+                    <div class="layui-inline">
+                        <input type="text" name="name" id="carName" placeholder="请输入查询信息" autocomplete="off" class="layui-input">
+                    </div>
+                    <button class="layui-btn" id="queryTransportOrderList"><i class="layui-icon">&#xe615;</i>查询</button>
+                    <div class="layui-input-block" style="margin: 10px;">
+                        <input name="status" title="全部" value="0" checked="" type="radio">
+                        <input name="status" title="待反馈" value="1" type="radio">
+                        <input name="status" title="待签收" value="2"  type="radio">
+                        <input name="status" title="待评价" value="3" type="radio">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/html" id="ordertabletoolbar">
+        <div class="layui-btn-container">
+            <button class="layui-btn" lay-event="receiptButton"><i class="layui-icon">&#xe619;</i>催接单</button>
+            <button class="layui-btn" lay-event="feedbackButton"><i class="layui-icon">&#xe63a;</i>催反馈</button>
+            <button class="layui-btn" lay-event="cancelButton"><i class="layui-icon">&#x1007;</i>取消订单</button>
+            <button class="layui-btn" lay-event="backButton"><i class="layui-icon">&#xe65c;</i>退单</button>
+            <button class="layui-btn" lay-event="evaluateButton"><i class="layui-icon">&#xe611;</i>评价</button>
+            <button class="layui-btn" lay-event="addButton"><i class="layui-icon">&#xe654;</i>创建运单</button>
+            <!--<button class="layui-btn" lay-event="addGoodsButton"><i class="layui-icon">&#xe654;</i>货主创建运单</button>-->
+            <!--<button class="layui-btn" lay-event="addCarButton"><i class="layui-icon">&#xe654;</i>车主创建运单</button>-->
+        </div>
+    </script>
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <table id="transportOrderTable" lay-filter="transportOrder_table_filter"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var url = '/bu/transportOrder',
+        cols = [
+            [ //表头
+                {type: 'radio'}
+                , {field: 'orderCode', title: '单号',}
+                , {field: 'goodsName', title: '货品',}
+                , {field: 'orgName', title: '车主',}
+                , {field: 'carName', title: '车牌号',}
+                , {field: 'lineName', title: '线路',}
+                , {field: 'orderType', title: '成单类型',}
+                , {field: 'transportType', title: '运输方式',}
+                , {field: 'receiptDate', title: '接单时间',}
+                , {field: 'industry', title: '数量',}
+                , {field: 'mainScope', title: '价格',}
+                , {field: 'mobile', title: '提货人',}
+                , {field: 'website', title: '手机号',}
+                , {field: 'mobile', title: '收货人',}
+                , {field: 'website', title: '手机号',}
+                , {field: 'linkMan', title: '车联系人',}
+                , {field: 'phone', title: '手机号',}
+                , {field: 'statusName', title: '状态',}
+                , {field: 'opt', title: '操作', width: 180, fixed: 'right', toolbar: '#opt-btn', unresize: true}
+            ]
+        ],
+        title = '运单', prefix='transportOrder';
+
+    layui.$(function () {
+        initFunction.initLayDate('startDate','yyyyMMdd','date',true);
+        initFunction.initLayDate('endDate','yyyyMMdd','date',true);
+        initFunction.initLayDate('sDate','yyyyMMdd','date',true);
+        initFunction.initLayDate('startD','yyyyMMdd','date',true);
+        initFunction.initLayDate('endD','yyyyMMdd','date',true);
+        layui.form.render('radio');
+        setTimeout(function () {
+            initPage();
+        }, 300);
+
+        layui.$('#queryTransportOrderList').click(function () {
+            var val = layui.$('#name').val();//获取输入框的值
+            initFunction.reloadTableList({name: val}, '/bu/transportOrder/getList4Page', 'transportOrderTable', 'GET');
+        });
+    });
+
+    function initPage() {
+        initFunction.initTable( prefix,url, cols,'ordertabletoolbar');
+        initFunction.tableToolBarOnEvent(prefix,url, title);
+        initFunction.tableToolEvent(prefix,url, title);
+    }
+</script>
+

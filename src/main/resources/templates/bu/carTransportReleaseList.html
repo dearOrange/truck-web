@@ -1,0 +1,58 @@
+<div class="layui-row layui-col-space10">
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-row">
+                <div class="layui-form layui-col-md12 my-search">
+                    <div class="layui-inline">
+                        <input type="text" name="currency" id="name" placeholder="请输入查询信息" autocomplete="off" class="layui-input">
+                    </div>
+                    <button class="layui-btn" id="queryCarTransportReleaseList"><i class="layui-icon">&#xe615;</i>查询</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <table id="carTransportReleaseTable" lay-filter="carTransportRelease_table_filter"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var url = '/bu/carTransportRelease',
+        cols = [
+            [ //表头
+                {type: 'checkbox', fixed: 'left'}
+                , {field: 'orgName', title: '货主',}
+                , {field: 'carTypeName', title: '车型',}
+                , {field: 'carLength', title: '车长(m)',}
+                , {field: 'name', title: '货品名称',}
+                , {field: 'weight', title: '货品重量',}
+                , {field: 'volume', title: '货品体积',}
+                , {field: 'startName', title: '始发地址',}
+                , {field: 'endName', title: '终点地址',}
+                , {field: 'createDate', title: '创建时间', sort: true}
+                , {field: 'opt', title: '操作', width: 180, fixed: 'right', toolbar: '#opt-btn', unresize: true}
+            ]
+        ],
+        title = '车辆需求', prefix='carTransportRelease';
+
+    layui.$(function () {
+        setTimeout(function () {
+            initPage();
+        }, 300);
+
+        layui.$('#queryCarTransportReleaseList').click(function () {
+            var val = layui.$('#name').val();//获取输入框的值
+            initFunction.reloadTableList({currency: val}, '/bu/carTransportRelease/getList4Page', 'carTransportReleaseTable', 'GET');
+        });
+    });
+
+    function initPage() {
+        initFunction.initTable( prefix,url, cols);
+        initFunction.tableToolBarOnEvent(prefix,url, title);
+        initFunction.tableToolEvent(prefix,url, title);
+    }
+</script>
+

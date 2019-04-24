@@ -1,0 +1,57 @@
+<div class="layui-row layui-col-space10">
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-row">
+                <div class="layui-form layui-col-md12 my-search">
+                    <div class="layui-inline">
+                        <input type="text" name="currency" id="name" placeholder="请输入查询信息" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                    <button class="layui-btn" id="queryCarLineList"><i class="layui-icon">&#xe615;</i>查询</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <table id="carLineTable" lay-filter="carLine_table_filter"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var url = '/bu/carLine',
+        cols = [
+            [ //表头
+                {type: 'checkbox', fixed: 'left'}
+                , {field: 'orgName', title: '车主',}
+                , {field: 'carType', title: '车型',}
+                , {field: 'licensePlate', title: '车牌',}
+                , {field: 'line', title: '线路',}
+                , {field: 'avgArrive', title: '平均到达时间',}
+                , {field: 'startTime', title: '当天发车时段',}
+                , {field: 'driverTime', title: '线路行驶次数',}
+                , {field: 'createDate', title: '创建时间', sort: true}
+                , {field: 'opt', title: '操作', width: 180, fixed: 'right', toolbar: '#opt-btn', unresize: true}
+            ]
+        ],
+        title = '车辆常用线路',prefix= 'carLine';
+
+    layui.$(function () {
+        setTimeout(function () {
+            initPage();
+        }, 300);
+
+        layui.$('#queryCarLineList').click(function () {
+            var val = layui.$('#name').val();//获取输入框的值
+            initFunction.reloadTableList({currency: val}, '/bu/carLine/getList4Page', 'carLineTable', 'GET');
+        });
+    });
+
+    function initPage() {
+        initFunction.initTable(prefix, url, cols);
+        initFunction.tableToolBarOnEvent(prefix,url, title);
+        initFunction.tableToolEvent(prefix,url, title);
+    }
+</script>

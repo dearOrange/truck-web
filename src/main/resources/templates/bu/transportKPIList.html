@@ -1,0 +1,64 @@
+<div class="layui-row layui-col-space10">
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-row">
+                <div class="layui-form layui-col-md12 my-search">
+                    <div class="layui-inline">
+                        <input type="text" name="name" id="name" placeholder="请输入查询信息" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                    <button class="layui-btn" id="queryTransportKPIList"><i class="layui-icon">&#xe615;</i>查询</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <table id="transportKPITable" lay-filter="transportKPI_table_filter"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var url = '/bu/transportKPI',
+        cols = [
+            [ //表头
+                {type: 'checkbox', fixed: 'left'}
+                , {field: 'orderCode', title: '单号',}
+                , {field: 'car', title: '车主',}
+                , {field: 'goods', title: '货物',}
+                , {field: 'feedbackTimes', title: '车辆反馈时间（小时）',}
+                , {field: 'drivingTimes', title: '线路发货时间（小时）',}
+                , {field: 'takeOnTimes', title: '提货准点率',}
+                , {field: 'tempAdvanceTimes', title: '临时竞标提前时间',}
+                , {field: 'electronReturnTimes', title: '电子返单时间（小时）',}
+                , {field: 'lineMomeRate', title: '线路发货接单率',}
+                , {field: 'paperReturnTimes', title: '纸质返单时间（小时）',}
+                , {field: 'maxCollectTimes', title: '最长确认收货时间（小时）',}
+                , {field: 'arriveOnTimes', title: '达到准点率',}
+                , {field: 'carStats', title: '车主星级',}
+                , {field: 'hasDispute', title: '是否有纠纷',}
+                , {field: 'createDate', title: '创建时间', sort: true}
+                , {field: 'opt', title: '操作', width: 180, fixed: 'right', toolbar: '#opt-btn', unresize: true}
+            ]
+        ],
+        title = '运单KPI',prefix= 'transportKPI';
+
+    layui.$(function () {
+        setTimeout(function () {
+            initPage();
+        }, 300);
+
+        layui.$('#queryTransportKPIList').click(function () {
+            var val = layui.$('#name').val();//获取输入框的值
+            initFunction.reloadTableList({name: val}, '/bu/transportKPI/getList4Page', 'transportKPITable', 'GET');
+        });
+    });
+
+    function initPage() {
+        initFunction.initTable(prefix, url, cols);
+        initFunction.tableToolBarOnEvent(prefix,url, title);
+        initFunction.tableToolEvent(prefix,url, title);
+    }
+</script>

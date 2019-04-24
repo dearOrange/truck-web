@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>角色查看</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../../static/base/css/font.css">
+    <link rel="stylesheet" href="../../static/base/css/my.css">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="my-body">
+    <form class="layui-form" lay-filter="showForm">
+        <input type="hidden" name="id" id="id" value=""/>
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label">
+                <span class="we-red">*</span>角色名称
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="name" name="roleName" readonly="true"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="role_type" class="layui-form-label">
+                <span class="we-red">*</span>角色类型
+            </label>
+            <div class="layui-input-inline">
+                <select name="roleType" id="role_type" readonly="true"  lay-filter="level-select">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label">
+                <span class="we-red">*</span>状态
+            </label>
+            <input type="radio" id="useable1" name="useable" value="1" title="启用">
+            <input type="radio" id="useable0" name="useable" value="0" title="禁用">
+        </div>
+
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label">角色
+            </label>
+            <div id="xtree_roles_edit" class="xtree_contianer" name="roles" style="margin-left: 140px;"></div>
+        </div>
+    </form>
+</div>
+<script src="../../static/layui/layui.js" charset="utf-8"></script>
+<script src="../../static/base/js/common.js" charset="utf-8"></script>
+<script src="../../static/layui/my/modules/layui-xtree.js" charset="utf-8"></script>
+<script type="text/javascript">
+
+    layui.use(['jquery', 'form'], function () {
+        var $ = layui.jquery,
+            form = layui.form,xtrees;
+
+
+        //页面初始化加载
+        $(function () {
+            setTimeout(function () {
+                frameVal();
+            }, 300);
+        });
+
+        function frameVal() {
+            xtrees = new layuiXtree({
+                elem: 'xtree_roles_edit'
+                , form: form
+                , data: '/function/treeDTO'
+                , isopen: false  //加载完毕后的展开状态，默认值：true
+                , ckall: true    //启用全选功能，默认值：false
+            });
+            var id = $('input[name="id"]').val();
+            if (id != undefined && id > 0) {
+                $.get("/role/getById?id=" + id, function (result) {
+                        if (result.code == 200) {
+                            form.val("showForm", result.data);
+                            //给状态重新渲染
+                            var useable = result.data.useable;
+                            if (useable != undefined && useable > 0) {
+                                document.getElementById("useable1").checked = true;
+                            } else {
+                                document.getElementById("useable0").checked = true;
+                            }
+                            initFunction.getDictSelectList(true,form, 'ROLE_TYPE', 'role_type', result.data.roleType);
+
+                            if (result.data.functions != null && result.data.functions.length > 0) {
+                                var allck = xtrees.GetAllCheckBox();
+                                setTimeout(function () {
+                                    for (var i = 0; i < allck.length; i++) {
+                                        for (var j = 0; j < result.data.functions.length; j++) {
+                                            if (allck[i].value == result.data.functions[j].id) {
+                                                allck[i].checked = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    form.render('checkbox');
+                                }, 300);
+                            }
+                            form.render();
+                        }
+                    }
+                )
+            }
+
+        }
+    });
+</script>
+</body>
+</html>

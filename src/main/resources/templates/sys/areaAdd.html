@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>添加区域</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../../static/base/css/font.css">
+    <link rel="stylesheet" href="../../static/base/css/my.css">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="my-body">
+    <form id="formAdd" class="layui-form">
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <!--tab1 content-->
+                <div class="layui-form-item">
+                    <label for="pid-select" class="layui-form-label"><span class="we-red">*</span>所属地区</label>
+                    <div class="layui-input-inline">
+                        <select name="parentId" id="pid-select" lay-filter="pid-select">
+                        </select>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label" for="name"><span class="we-red">*</span>区域名称</label>
+                    <div class="layui-input-inline">
+                        <input id="name" type="text" name="name" lay-verify="required" jq-error="请输入名称"
+                               placeholder="请输入名称"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" for="code"><span class="we-red">*</span>区域编码</label>
+                    <div class="layui-input-inline">
+                        <input id="code" type="text" name="code" lay-verify="required" jq-error="请输入编码"
+                               placeholder="请输入编码"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" for="level"><span class="we-red">*</span>层级</label>
+                    <div class="layui-input-inline">
+                        <select name="level" id="level" lay-verify="required" lay-filter="evel-select">
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label" for="sort">排序</label>
+                    <div class="layui-input-inline">
+                        <input id="sort" type="number" name="sort" value="100" jq-error="排序必须为数字"
+                               placeholder="排序" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <label class="layui-form-label">说明</label>
+                <textarea name="remarks" rows="4"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: center;">
+            <button class="layui-btn" id="addForm" lay-submit="" lay-filter="addForm">添加</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </form>
+</div>
+<script src="../../static/layui/layui.js" charset="utf-8"></script>
+<script src="../../static/base/js/common.js" charset="utf-8"></script>
+<script type="text/javascript">
+    layui.use(['jquery', 'form', 'layer'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            layer = layui.layer;
+
+        //监听提交
+        form.on('submit(addForm)', function (data) {
+            $.ajax({
+                url: '/area/save',
+                type: 'POST',
+                data: data.field,
+                dataType: "json",
+                success: function (result) {
+                    if (result.code == 200) {
+                        layer.msg('添加成功', {
+                            icon: 6,
+                            time: 1500
+                        }, function () {
+                            parent.layui.treeGrid.reload('areaTreeList', {
+                                page: {
+                                    curr: 1
+                                }
+                            });
+                            // 获得frame索引
+                            //关闭当前frame
+                            parent.layer.close(parent.layer.getFrameIndex(window.name));
+                        });
+                    } else {
+                        layer.msg(result.msg);
+                    }
+                }
+
+            });
+            return false;
+        });
+        $(document).ready(function () {
+            setTimeout(function () {
+                initPage();
+            }, 300);
+        });
+
+        function initPage() {
+            initFunction.getSelectAreaTree(true,form, 'pid-select');
+            initFunction.getDictSelectList(true,form, 'LEVEL', 'level');
+        }
+    });
+</script>
+</body>
+</html>

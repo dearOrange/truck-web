@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>车辆查看</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../../static/base/css/font.css">
+    <link rel="stylesheet" href="../../static/base/css/my.css">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="my-body">
+    <form class="layui-form" lay-filter="showForm">
+        <input type="hidden" name="id" id="id" value=""/>
+        <div class="layui-form-item">
+            <label for="memberId" class="layui-form-label">
+                仓主
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="memberId" name="memberName" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="orgId" class="layui-form-label">
+                企业
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="orgId" name="orgName" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label">
+                仓库名称
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="name" name="name" required="" lay-verify="required|name"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="provincialId" class="layui-form-label">
+                所在省
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="provincialId" name="provincial" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="cityId" class="layui-form-label">
+                所在市
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="cityId" name="city" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="countyId" class="layui-form-label">
+                所在县
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="countyId" name="county" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="address" class="layui-form-label">
+                详细地址
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="address" id="address"  required="" lay-verify="required|address"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                乡镇（街道）-村（社区）-楼号-门牌号
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="total_area" class="layui-form-label">
+                总面积
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="totalArea" id="total_area" readonly="true"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                ㎡
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="can_use" class="layui-form-label">
+                可用面积
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="canUse" id="can_use" readonly="true"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                ㎡
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="total_volume" class="layui-form-label">
+                总容积
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="totalVolume" id="total_volume" readonly="true"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                m³
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="empty_volume" class="layui-form-label">
+                空置容积
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="emptyVolume" id="empty_volume" readonly="true"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                m³
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="mng_type" class="layui-form-label">
+                经营类型
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="mngTypeName" id="mng_type" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="warehouse_type" class="layui-form-label">
+                仓库类型
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="warehouseTypeName" id="warehouse_type" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="warehouse_high" class="layui-form-label">
+                库高
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="warehouseHigh" id="warehouse_high" readonly="true"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                m
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="warehouse_length" class="layui-form-label">
+                库长
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="warehouseLength" id="warehouse_length"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                m
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="warehouse_width" class="layui-form-label">
+                库宽
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="warehouseWidth" id="warehouse_width" readonly="true"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+               m
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="build_type" class="layui-form-label">
+                建筑类型
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="buildTypeName" id="build_type" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="build_structure" class="layui-form-label">
+                建筑结构
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="buildStructureName" id="build_structure" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="storehouse_stuff" class="layui-form-label">
+                仓顶材质
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="storehouseStuff" id="storehouse_stuff"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="storage_way" class="layui-form-label">
+                存放形式
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="storageWay" id="storage_way"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                是否可分割
+            </label>
+            <input type="radio" name="isCut" id="isCut1" value="1" title="可以">
+            <input type="radio" name="isCut" id="isCut0" value="0" title="不可以">
+        </div>
+        <div class="layui-form-item">
+            <label for="warehouse_model" class="layui-form-label">
+                仓库模式
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="warehouseModelName" id="warehouse_model" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="warehouse_floor" class="layui-form-label">
+                仓库地坪
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="warehouseFloor" id="warehouse_floor"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <!--物品种类没写-->
+        <div class="layui-form-item">
+            <label for="price" class="layui-form-label">
+                价格
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="price" id="price" readonly="true"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                元
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                是否有仓配服务
+            </label>
+            <input type="radio" id="hasService1" name="hasService" value="1" title="有">
+            <input type="radio" id="hasService0" name="hasService" value="0" title="没有">
+        </div>
+    </form>
+</div>
+<script src="../../static/layui/layui.js" charset="utf-8"></script>
+<script src="../../static/base/js/common.js" charset="utf-8"></script>
+<script type="text/javascript">
+
+    layui.use(['jquery', 'form'], function () {
+        var $ = layui.jquery,
+            form = layui.form;
+
+        //页面初始化加载
+        $(function () {
+            setTimeout(function () {
+                frameVal();
+            }, 300);
+        });
+
+        function frameVal() {
+            var id = $('input[name="id"]').val();
+            if (id != undefined && id > 0) {
+                $.ajax({
+                    url:"/bu/warehouse/getById?id=" + id,
+                    type: 'GET',
+                    dataType : "json",
+                    success: function (result) {
+                        if (result.code == 200) {
+                            form.val("showForm", result.data);
+                            //给状态重新渲染
+                            var isCut = result.data.isCut;
+                            if (isCut != undefined && isCut > 0) {
+                                document.getElementById("isCut1").checked = true;
+                            } else if(isCut != undefined){
+                                document.getElementById("isCut0").checked = true;
+                            }
+                            var hasService = result.data.hasService;
+                            if (hasService != undefined && hasService > 0) {
+                                document.getElementById("hasService1").checked = true;
+                            } else if (hasService != undefined ) {
+                                document.getElementById("hasService0").checked = true;
+                            }
+                            form.render();
+                        } else {
+                            layer.msg(re.msg);
+                        }
+                    }
+                });
+            }
+        }
+    });
+</script>
+</body>
+</html>

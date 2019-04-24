@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>一号冷链</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="./static/base/css/font.css">
+    <link rel="stylesheet" href="./static/base/css/my.css">
+
+</head>
+<body class="login-bg">
+
+<div class="login">
+    <div class="message">一号冷链-登录</div>
+    <div id="darkbannerwrap"></div>
+    <form method="post" class="layui-form">
+        <input name="mobile" placeholder="手机号" type="text" lay-verify="required" class="layui-input">
+        <hr class="hr15">
+        <input name="pwd" id="pwd" lay-verify="required" placeholder="密码" type="password" class="layui-input">
+        <hr class="hr15">
+        <input class="loginin" value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
+        <hr class="hr20">
+    </form>
+</div>
+<script type="text/javascript" src="./static/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+    layui.use(['jquery', 'form'], function () {
+        var form = layui.form
+            , $ = layui.$;
+        // layer.msg('玩命卖萌中', function(){
+        //   //关闭后的操作
+        //   });
+        $(function () {
+            setTimeout(function () {
+                if (sessionStorage != undefined && sessionStorage != null) {
+                    if (sessionStorage.getItem("token") != undefined && sessionStorage.getItem("token") != null && sessionStorage.getItem("token") != '') {
+                        if ('' != JSON.parse(sessionStorage.getItem("token")).token) {
+                            location.href = '/index';
+                        }
+                    }
+                }
+            },1000);
+        });
+
+        //监听提交
+        form.on('submit(login)', function (data) {
+            if (data == undefined || data.field == undefined || data.field.mobile == undefined || data.field.pwd == undefined) {
+                layer.msg("手机号和密码不能为空");
+                return false;
+            }
+            if ('' == data.field.mobile) {
+                layer.msg("手机号不能为空");
+                return false;
+            }
+            if ('' == data.field.pwd) {
+                layer.msg("密码不能为空");
+                return false;
+            }
+            $.ajax({
+                url: '/doLogin',
+                type: 'POST',
+                data: data.field,
+                dataType: "json",
+                success: function (result) {
+                    if (result.code == 200 && result.data != null) {
+                        sessionStorage.setItem("token", JSON.stringify(result.data));
+                        location.href = '/index';
+                    } else {
+                        sessionStorage.setItem("token", '');
+                        layer.msg(result.msg);
+                        $('pwd').val('');
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>
+<!-- 底部结束 -->
+</body>
+</html>

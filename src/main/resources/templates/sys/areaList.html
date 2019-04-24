@@ -1,0 +1,12 @@
+<div class="my-body">
+	<div class="my-block">
+		<button class="layui-btn" id="expand"  onclick="openAll();">展开/收起</button>
+		<button class="layui-btn" id="reload"  onclick="reload();">刷  新</button>
+		<button class="layui-btn" onclick="myformShow('添加区域','./area/add',600,500)"><i class="layui-icon"></i>添  加
+		</button>
+	</div>
+	<div>
+		<table id="areaTreeList" lay-filter="area_tree_list"></table>
+	</div>
+</div>
+<script src="../../static/base/js/area.js"></script>

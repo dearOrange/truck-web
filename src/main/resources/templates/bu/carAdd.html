@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>车辆添加</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../../static/base/css/font.css">
+    <link rel="stylesheet" href="../../static/base/css/my.css">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="my-body">
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <label for="org_id" class="layui-form-label">
+                <span class="we-red">*</span>车主
+            </label>
+            <div class="layui-input-inline">
+                <select name="orgId" id="org_id"   lay-verify="required" lay-filter="level-select">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="car_type" class="layui-form-label">
+                <span class="we-red">*</span>车型
+            </label>
+            <div class="layui-input-inline">
+                <select name="carType" id="car_type"  lay-filter="level-select" lay-verify="required">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="max_load" class="layui-form-label">
+                最大载重
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="max_load" name="maxLoad" lay-verify="number"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                吨
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="car_length" class="layui-form-label">
+                车长
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="car_length" name="carLength" lay-verify="number"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                m
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="car_wide" class="layui-form-label">
+                车宽
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="car_wide" name="carWide" lay-verify="number"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                m
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="max_high" class="layui-form-label">
+                车高
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="max_high" name="maxHigh" lay-verify="number"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                m
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="license_plate" class="layui-form-label">
+                车牌
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="license_plate" name="licensePlate" lay-verify="licensePlate"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                如:浙A88888
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="brand" class="layui-form-label">
+                品牌
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="brand" name="brand" lay-verify="brand"  autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="oncard_date" class="layui-form-label">
+                上牌时间
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="oncard_date" name="oncardDate"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="run_km" class="layui-form-label">
+                行驶公里数
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="run_km" name="runKm" lay-verify="number"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                km
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="insurance" class="layui-form-label">
+                当前险种
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="insurance" name="insurance" lay-verify="insurance"  autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="in_Insurance_time" class="layui-form-label">
+                出险次数
+            </label>
+            <div class="layui-input-inline">
+                <input type="number" id="in_Insurance_time" name="inInsuranceTime"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="repair_desc" class="layui-form-label">
+                维修说明
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="repair_desc" name="repairDesc"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="car_condition" class="layui-form-label">
+                车况
+            </label>
+            <div class="layui-input-inline">
+                <select name="carCondition" id="car_condition" lay-filter="level-select">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: center;">
+            <button class="layui-btn" lay-filter="addForm" lay-submit="">增加</button>
+        </div>
+    </form>
+</div>
+<script src="../../static/layui/layui.js" charset="utf-8"></script>
+<script src="../../static/base/js/common.js" charset="utf-8"></script>
+<script type="text/javascript">
+    layui.use(['jquery','form','layer'], function(){
+        var $ = layui.jquery,
+            form = layui.form,
+            layer = layui.layer;
+
+        form.render();
+        //自定义验证规则
+        form.verify({
+            name:function(value, item){ //value：表单的值、item：表单的DOM对象
+                if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
+                    return '用户名不能有特殊字符';
+                }
+                if(/(^\_)|(\__)|(\_+$)/.test(value)){
+                    return '用户名首尾不能出现下划线\'_\'';
+                }
+                if(/^\d+\d+\d$/.test(value)){
+                    return '用户名不能全为数字';
+                }
+            }
+            ,mobile:[/^1(?:3\d|4[4-9]|5[0-35-9]|6[67]|7[013-8]|8\d|9\d)\d{8}$/,'手机号码格式不正式']
+            ,licensePlate:function(value, item){ //value：表单的值、item：表单的DOM对象
+                if(value != undefined && value!=""){
+                    if(!new RegExp("^[\u4e00-\u9fa5]{1}[A-Z]{1}[A-Z_0-9]{5}$").test(value)){
+                        return '输入的车牌号格式不正确';
+                    }
+                }
+
+            }
+
+        });
+
+        //监听提交
+        form.on('submit(addForm)', function(data){
+            $.ajax({
+                url: '/bu/car/save',
+                type: 'POST',
+                data: data.field,
+                dataType : "json",
+                success: function (result) {
+                    if (result.code == 200) {
+                        layer.msg('添加成功', {
+                            icon: 6,
+                            time: 1500
+                        }, function () {
+                            parent.layui.table.reload('carTable',{page: {curr: 1}});
+                            // 获得frame索引
+                            //关闭当前frame
+                            parent.layer.close(parent.layer.getFrameIndex(window.name));
+                        });
+                    } else {
+                        layer.msg(result.msg);
+                    }
+                }
+            });
+            return false;
+        });
+
+        $(document).ready(function () {
+            setTimeout(function () {
+                initPage();
+            }, 500);
+        });
+
+        function initPage(){
+            initFunction.getSelectList(true,form,'/org/getList','org_id');//车主
+            initFunction.getDictSelectList(true,form, 'CAR_TYPE','car_type');
+            // initFunction.getDictSelectList(true,form, 'BRAND','brand');
+            // initFunction.getDictSelectList(true,form, 'INSURANCE','insurance');//险种
+            initFunction.getDictSelectList(true,form, 'CAR_CONDITION','car_condition');//车况
+            initFunction.initLayDate('oncard_date','yyyy-MM-dd')
+        }
+
+    });
+</script>
+</body>
+</html>

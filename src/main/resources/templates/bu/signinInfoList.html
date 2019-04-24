@@ -1,0 +1,59 @@
+<div class="layui-row layui-col-space10">
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-row">
+                <div class="layui-form layui-col-md12 my-search">
+                    <div class="layui-inline">
+                        <input type="text" name="name" id="name" placeholder="请输入查询信息" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                    <button class="layui-btn" id="querySigninInfoList"><i class="layui-icon">&#xe615;</i>查询</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <table id="signinInfoTable" lay-filter="signinInfo_table_filter"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var url = '/bu/signinInfo',
+        cols = [
+            [ //表头
+                {type: 'checkbox', fixed: 'left'}
+                , {field: 'orderId', title: '单号',}
+                , {field: 'signMan', title: '签收人',}
+                , {field: 'phone', title: '手机号',}
+                , {field: 'signDate', title: '签收时间',}
+                , {field: 'returnWayName', title: '反单方式',}
+                , {field: 'signPage', title: '页数',}
+                , {field: 'isPostName', title: '是否邮寄',}
+                , {field: 'expressCode', title: '快递单号',}
+                , {field: 'statusName', title: '状态',}
+                , {field: 'createDate', title: '创建时间', sort: true}
+                , {field: 'opt', title: '操作', width: 180, fixed: 'right', toolbar: '#opt-btn', unresize: true}
+            ]
+        ],
+        title = '签收单',prefix= 'signinInfo';
+
+    layui.$(function () {
+        setTimeout(function () {
+            initPage();
+        }, 300);
+
+        layui.$('#querySigninInfoList').click(function () {
+            var val = layui.$('#name').val();//获取输入框的值
+            initFunction.reloadTableList({name: val}, '/bu/signinInfo/getList4Page', 'signinInfoTable', 'GET');
+        });
+    });
+
+    function initPage() {
+        initFunction.initTable(prefix, url, cols);
+        initFunction.tableToolBarOnEvent(prefix,url, title);
+        initFunction.tableToolEvent(prefix,url, title);
+    }
+</script>

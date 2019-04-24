@@ -1,0 +1,59 @@
+<div class="layui-row layui-col-space10">
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-row">
+                <div class="layui-form layui-col-md12 my-search">
+                    <div class="layui-inline">
+                        <input type="text" name="name" id="name" placeholder="请输入查询信息" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                    <button class="layui-btn" id="queryWarehouseNeedList"><i class="layui-icon">&#xe615;</i>查询</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <table id="warehouseNeedTable" lay-filter="warehouseNeed_table_filter"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var url = '/bu/warehouseNeed',
+        cols = [
+            [ //表头
+                {type: 'checkbox', fixed: 'left'}
+                , {field: 'orgName', title: '货主',}
+                , {field: 'goodsTypeName', title: '货品品类',}
+                , {field: 'goodsName', title: '货品名称',}
+                , {field: 'operateTypeName', title: '运营类型',}
+                , {field: 'warehouseTypeName', title: ' 仓库类型',}
+                , {field: 'addressNeed', title: '地理要求',}
+                , {field: 'useDate', title: '开始日期',}
+                , {field: 'endDate', title: '截止日期',}
+                , {field: 'status', title: '状态',}
+                , {field: 'createDate', title: '创建时间', sort: true}
+                , {field: 'opt', title: '操作', width: 180, fixed: 'right', toolbar: '#opt-btn', unresize: true}
+            ]
+        ],
+        title = '仓库需求',prefix= 'warehouseNeed';
+
+    layui.$(function () {
+        setTimeout(function () {
+            initPage();
+        }, 300);
+
+        layui.$('#queryWarehouseNeedList').click(function () {
+            var val = layui.$('#name').val();//获取输入框的值
+            initFunction.reloadTableList({name: val}, '/bu/warehouseNeed/getList4Page', 'warehouseNeedTable', 'GET');
+        });
+    });
+
+    function initPage() {
+        initFunction.initTable(prefix, url, cols);
+        initFunction.tableToolBarOnEvent(prefix,url, title);
+        initFunction.tableToolEvent(prefix,url, title);
+    }
+</script>

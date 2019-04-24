@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>企业编辑</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../../static/base/css/font.css">
+    <link rel="stylesheet" href="../../static/base/css/my.css">
+    <link rel="stylesheet" href="../../static/base/css/formSelects.css">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="my-body">
+    <form class="layui-form" lay-filter="showForm">
+        <input type="hidden" name="id" id="id" value=""/>
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label">
+                <span class="we-red">*</span>名称
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="name" name="name" required="" lay-verify="required|name"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                姓名或企业名称
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="org_type" class="layui-form-label">
+                <span class="we-red">*</span>公司类型
+            </label>
+            <div class="layui-input-inline">
+                <select name="orgType" id="org_type" lay-verify="required" lay-filter="level-select">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="provinceId" class="layui-form-label">
+                <span class="we-red">*</span>所在省
+            </label>
+            <div class="layui-input-inline">
+                <select name="provinceId" lay-verify="required" lay-filter="province_id" id="provinceId">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="cityId" class="layui-form-label">
+                <span class="we-red">*</span>所在市
+            </label>
+            <div class="layui-input-inline">
+                <select name="cityId" lay-verify="required" id="cityId" lay-filter="city_id">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="countyId" class="layui-form-label">
+                <span class="we-red">*</span>所在县
+            </label>
+            <div class="layui-input-inline">
+                <select name="countyId" lay-verify="required" id="countyId" lay-filter="county_id">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="address" class="layui-form-label">
+                <span class="we-red">*</span>详细地址
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="address" id="address" required="" lay-verify="required|address"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+               乡镇街道-村社区-楼号-门牌号
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="industry" class="layui-form-label">
+                <span class="we-red">*</span>所属行业
+            </label>
+            <div class="layui-input-inline">
+                <select name="industry" id="industry" lay-verify="required" lay-filter="level-select">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="mainScope" class="layui-form-label">
+                主营内容
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="mainScope" id="mainScope"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="linkMan" class="layui-form-label">
+                <span class="we-red">*</span>联系人
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="linkMan" id="linkMan" lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="phone" class="layui-form-label">
+                <span class="we-red">*</span>企业电话
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="phone" id="phone" lay-verify="required|isMob"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="mobile" class="layui-form-label">
+                <span class="we-red">*</span>手机号
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="mobile" name="mobile" lay-verify="required|mobile"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="website" class="layui-form-label">
+                公司网址
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="website" id="website"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="id_type" class="layui-form-label">
+                <span class="we-red">*</span>证件类型
+            </label>
+            <div class="layui-input-inline">
+                <select name="idType" id="id_type" lay-filter="id_type" lay-verify="required">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="idNumber" class="layui-form-label">
+                <span class="we-red">*</span>证件号码
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="idNumber" id="idNumber" lay-verify="required|number"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="members" class="layui-form-label">
+                会员
+            </label>
+            <div class="layui-input-inline" style="width:400px;">
+                <select name="memberIds" id="members"  xm-select="members" >
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: center;">
+            <button class="layui-btn" lay-filter="editForm" lay-submit="">保存</button>
+        </div>
+    </form>
+</div>
+<script src="../../static/layui/layui.js" charset="utf-8"></script>
+<script src="../../static/base/js/common.js" charset="utf-8"></script>
+<script src="../../static/layui/my/modules/formSelects-v4.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+
+    layui.config({
+        base: '../../static/layui/my/modules/' //存放拓展模块的根目录
+    }).extend({ //设定模块别名
+        sysFunction: 'functions'//如果 tabTab.js 是在根目录，也可以不用设定别名
+        ,treeGrid:'treeGrid'
+        ,xtree:'layui-xtree'
+    });
+
+    layui.use(['jquery', 'form', 'layer'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            layer = layui.layer;
+
+        //自定义验证规则
+        form.verify({
+            name: function (value, item) { //value：表单的值、item：表单的DOM对象
+                if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
+                    return '用户名不能有特殊字符';
+                }
+                if (/(^\_)|(\__)|(\_+$)/.test(value)) {
+                    return '用户名首尾不能出现下划线\'_\'';
+                }
+                if (/^\d+\d+\d$/.test(value)) {
+                    return '用户名不能全为数字';
+                }
+            }
+            , mobile: [/^1(?:3\d|4[4-9]|5[0-35-9]|6[67]|7[013-8]|8\d|9\d)\d{8}$/, '手机号码格式不正式']
+            , number: [/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/, '证件号码格式有误']
+            , isMob: [/^0?1[3|4|5|8][0-9]\d{8}$/, '电话格式有误']
+        });
+
+        //页面初始化加载
+        $(function () {
+            setTimeout(function () {
+                frameVal();
+                //formSelects.render('members');
+            }, 300);
+        });
+
+        function frameVal() {
+            var id = $('input[name="id"]').val();
+            if (id != undefined && id > 0) {
+                $.get("/org/getById?id=" + id, function (result) {
+                    if (result.code == 200) {
+                        form.val("showForm", result.data);
+                        initFunction.getDictSelectList(true,form, 'ORG_TYPE', 'org_type', result.data.orgType);
+                        initFunction.getDictSelectList(true,form, 'ID_TYPE', 'id_type', result.data.idType);
+                        initFunction.getDictSelectList(true,form, 'INDUSTRY', 'industry', result.data.industry);
+                        //区域下拉列表 省
+                        initFunction.getSelectAreaTree(true,form, 'provinceId', {level: "1"}, result.data.provinceId);
+                        initFunction.getSelectAreaTree(true,form, 'cityId', {
+                            level: "2",
+                            pid: result.data.provinceId
+                        }, result.data.cityId);
+                        initFunction.getSelectAreaTree(true,form, 'countyId', {
+                            level: "3",
+                            pid: result.data.cityId
+                        }, result.data.countyId);
+                        initFunction.getMutlSelect(form,'members','/member/getMutiSelect',{orgId:id});
+                        form.render();
+                    }
+                })
+            }
+        }
+
+
+        form.on('select(members)', function (data) {
+            // console.log(data.elem); //得到select原始DOM对象
+            console.log(data.value); //得到被选中的值
+            // console.log(data.othis); //得到美化后的DOM对象
+            console.log(data.current_value); //当前操作的值
+        });
+
+
+        form.on('select(province_id)', function (data) {
+            initFunction.getSelectAreaTree(true,form, 'cityId', {level: "2", pid: data.value});
+            $("#countyId").empty();
+            $("#cityId").empty();
+        });
+
+        form.on('select(city_id)', function (data) {
+            initFunction.getSelectAreaTree(true,form, 'countyId', {level: "3", pid: data.value});
+            $("#countyId").empty();
+        });
+
+        //监听提交
+        form.on('submit(editForm)', function (data) {
+            $.ajax({
+                url: '/org/save',
+                type: 'POST',
+                data: data.field,
+                dataType: "json",
+                success: function (result) {
+                    if (result != undefined && result.code == 200) {
+                        layer.msg(result.msg, {
+                            icon: 1,
+                            time: 1200
+                        }, function () {
+                            parent.layui.table.reload('orgTable', {page: {curr: 1}});
+                            // 获得frame索引
+                            //关闭当前frame
+                            parent.layer.close(parent.layer.getFrameIndex(window.name));
+                        });
+                    } else {
+                        layer.msg(result.msg);
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

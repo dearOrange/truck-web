@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>编辑会员</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../../static/base/css/font.css">
+    <link rel="stylesheet" href="../../static/base/css/my.css">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="my-body">
+    <form class="layui-form" lay-filter="showForm">
+        <input type="hidden" name="id" id="id" value=""/>
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label">
+                <span class="we-red">*</span>名称
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="name" name="name" required="" lay-verify="required|name"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                姓名或企业名称
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="mobile" class="layui-form-label">
+                <span class="we-red">*</span>手机
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="mobile" name="mobile" required="" lay-verify="required|mobile"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                将会成为您唯一的登入名
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="memberAccount" class="layui-form-label">
+                <span class="we-red">*</span>编码
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="memberAccount" name="memberAccount" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+               请输入编码
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="register_type" class="layui-form-label">
+                注册类型
+            </label>
+            <div class="layui-input-inline">
+                <select name="registerType" id="register_type"  lay-filter="register_type" lay-verify="required">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label  class="layui-form-label" >
+                <span class="we-red">*</span>状态
+            </label>
+            <input type="radio" id="loginFlag1" name="loginFlag" value="1" title="启用">
+            <input type="radio" id="loginFlag0" name="loginFlag" value="0" title="禁用">
+        </div>
+        <div class="layui-form-item" pane="">
+            <label class="layui-form-label">角色</label>
+            <div class="layui-input-inline" id="roles">
+
+            </div>
+        </div>
+        <!--<div class="layui-form-item">-->
+        <!--<label for="L_oldpass" class="layui-form-label">-->
+        <!--原密码-->
+        <!--</label>-->
+        <!--<div class="layui-input-inline">-->
+        <!--<input type="password" id="L_oldpass" name="oldpass" lay-verify="oldpass"-->
+        <!--autocomplete="off" class="layui-input">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="layui-form-item">-->
+        <!--<label for="L_pass" class="layui-form-label">-->
+        <!--密码-->
+        <!--</label>-->
+        <!--<div class="layui-input-inline">-->
+        <!--<input type="password" id="L_pass" name="password" lay-verify="pass"-->
+        <!--autocomplete="off" class="layui-input">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="layui-form-item">-->
+        <!--<label for="L_repass" class="layui-form-label">-->
+        <!--确认密码-->
+        <!--</label>-->
+        <!--<div class="layui-input-inline">-->
+        <!--<input type="password" id="L_repass" name="repass" lay-verify="repass"-->
+        <!--autocomplete="off" class="layui-input">-->
+        <!--</div>-->
+        <!--</div>-->
+        <div class="layui-form-item" style="text-align: center;">
+            <button class="layui-btn" id="editForm" lay-filter="editForm" lay-submit="">保存</button>
+        </div>
+    </form>
+</div>
+<script src="../../static/layui/layui.js" charset="utf-8"></script>
+<script src="../../static/base/js/common.js" charset="utf-8"></script>
+<script type="text/javascript">
+
+    layui.use(['jquery', 'form', 'layer'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            layer = layui.layer;
+
+        //自定义验证规则
+        form.verify({
+            name: function (value, item) { //value：表单的值、item：表单的DOM对象
+                if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
+                    return '用户名不能有特殊字符';
+                }
+                if (/(^\_)|(\__)|(\_+$)/.test(value)) {
+                    return '用户名首尾不能出现下划线\'_\'';
+                }
+                if (/^\d+\d+\d$/.test(value)) {
+                    return '用户名不能全为数字';
+                }
+            }
+            // // ,mobile:[/^1(?:3\d|4[4-9]|5[0-35-9]|6[67]|7[013-8]|8\d|9\d)\d{8}$/,'手机号码格式不正式']
+            // , oldpass: [/(.+){6,12}$/, '密码必须6到12位']
+            // , pass: [/(.+){6,12}$/, '密码必须6到12位']
+            // , repass: function (value) {
+            //     if ($('#L_pass').val() != value) {
+            //         return '两次密码不一致';
+            //     }
+            // }
+        });
+
+        //页面初始化加载
+        $(function () {
+            setTimeout(function () {
+                frameVal();
+            }, 300);
+        });
+
+        function frameVal() {
+            var id = $('input[name="id"]').val();
+            if (id != undefined && id > 0) {
+                $.ajax({
+                    url: "/member/getById?id=" + id,
+                    type: 'GET',
+                    dataType: "json",
+                    success: function (re) {
+                        if (re.code == 200) {
+                            re.data.password = "";
+                            form.val("showForm", re.data);
+                            //给状态重新渲染
+                            var loginFlag = re.data.loginFlag;
+                            if (loginFlag != undefined && loginFlag > 0) {
+                                document.getElementById("loginFlag1").checked = true;
+                            } else {
+                                document.getElementById("loginFlag0").checked = true;
+                            }
+                            initFunction.getDictSelectList(true,form, 'REGISTER_TYPE', 'register_type', re.data.registerType);
+                            //给复选框选中
+                            $.ajax({
+                                url: '/role/getList',
+                                type: 'GET',
+                                data: {},
+                                dataType : "json",
+                                success: function (result) {
+                                    if (result.code == 200 && result.data != null) {
+                                        var data = result.data, html = '';
+                                        $('#roles').empty();
+                                        data.forEach(function (item) {
+                                            html += '<input type="checkbox" name="role" value="' + item.id + '" lay-skin="primary" title="' + item.roleName + '"';
+                                            re.data.roleList.forEach(function (it) {
+                                                if (item.id != undefined && item.id === it.id) {
+                                                    html += ' checked="true" ';
+                                                }
+                                            });
+                                            html += '>';
+                                        });
+                                        $('#roles').append(html);
+                                        form.render('checkbox');
+                                    } else {
+                                        layer.msg(result.msg);
+                                    }
+                                }
+                            });
+                            form.render();
+                        } else {
+                            layer.msg(re.msg);
+                        }
+                    }
+                });
+            }
+        }
+
+
+        //监听提交
+        form.on('submit(editForm)', function (data) {
+            //获取checkbox[name='like']的值
+            var arr = new Array();
+            $("input:checkbox[name='role']:checked").each(function(i){
+                arr[i] = $(this).val();
+            });
+            data.field.roles = arr.join(",");//将数组合并成字符串
+            $.ajax({
+                url: '/member/save',
+                type: 'POST',
+                data: data.field,
+                dataType: "json",
+                success: function (result) {
+                    if (result.code == 200) {
+                        layer.msg('保存成功', {
+                            icon: 6,
+                            time: 1500
+                        }, function () {
+                            parent.layui.table.reload('memberTable', {page: {curr: 1}});
+                            // 获得frame索引
+                            //关闭当前frame
+                            parent.layer.close(parent.layer.getFrameIndex(window.name));
+                        });
+                    } else {
+                        layer.msg(result.msg);
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>运单编辑</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../../static/base/css/font.css">
+    <link rel="stylesheet" href="../../static/base/css/my.css">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="my-body">
+    <form class="layui-form" lay-filter="showForm">
+        <input type="hidden" name="id" id="id" value=""/>
+        <div class="layui-form-item">
+            <label for="orgId" class="layui-form-label">
+                <span class="we-red">*</span>货主
+            </label>
+            <div class="layui-input-inline">
+                <select name="orgId" id="orgId" lay-verify="required" lay-filter="orgId">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="goodsId" class="layui-form-label">
+                <span class="we-red">*</span>货品需求
+            </label>
+            <div class="layui-input-inline">
+                <select name="goodsId" id="goodsId" lay-verify="required" lay-filter="goodsId">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="lineId" class="layui-form-label">
+                线路
+            </label>
+            <div class="layui-input-inline">
+                <select name="lineId" id="lineId" lay-verify="required" lay-filter="level-select">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="carId" class="layui-form-label">
+                <span class="we-red">*</span>车辆
+            </label>
+            <div class="layui-input-inline">
+                <select name="carId" id="carId" lay-verify="required" lay-filter="level-select">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="driverId" class="layui-form-label">
+                <span class="we-red">*</span>司机
+            </label>
+            <div class="layui-input-inline">
+                <select name="driverId" id="driverId" lay-verify="required" lay-filter="level-select">
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="orderType" class="layui-form-label">
+                成单类型
+            </label>
+            <div class="layui-input-inline">
+                <select name="orderType" id="orderType" lay-filter="level-select">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="transportType" class="layui-form-label">
+                运输方式
+            </label>
+            <div class="layui-input-inline">
+                <select name="transportType" id="transportType" lay-filter="level-select">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="num" class="layui-form-label">
+                <span class="we-red">*</span>数量
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="num" id="num" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="unit" class="layui-form-label">
+                <span class="we-red">*</span>数量单位
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="unit" id="unit" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="amount" class="layui-form-label">
+                <span class="we-red">*</span>价格
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="amount" id="amount" autocomplete="off"  lay-verify="number" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                元
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="receiptDate" class="layui-form-label">
+                接单时间
+            </label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  name="receiptDate"  id="receiptDate">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="feedbackDate" class="layui-form-label">
+                反馈时间
+            </label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  name="feedbackDate"   id="feedbackDate">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="carArriveDate" class="layui-form-label">
+                车辆到达时间
+            </label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  name="carArriveDate"  id="carArriveDate">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="takeGoodsMan" class="layui-form-label">
+                <span class="we-red">*</span>提货人
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="takeGoodsMan" id="takeGoodsMan" lay-verify="required" autocomplete="off" lay-filter="takeGoodsMan"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="takeManPhone" class="layui-form-label">
+                <span class="we-red">*</span>联系方式
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="takeManPhone" id="takeManPhone" lay-verify="required" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="takeGoodsDate" class="layui-form-label">
+                提货时间
+            </label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  name="takeGoodsDate"   id="takeGoodsDate">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="collectMan" class="layui-form-label">
+                <span class="we-red">*</span>收货人
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="collectMan" id="collectMan" lay-verify="required" autocomplete="off" lay-filter="collectMan"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="collectManPhone" class="layui-form-label">
+                <span class="we-red">*</span>联系方式
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="collectManPhone" id="collectManPhone" lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="planCollectDate" class="layui-form-label">
+                计划收货时间
+            </label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  name="planCollectDate"  id="planCollectDate">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="collectDate" class="layui-form-label">
+                收货时间
+            </label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  name="collectDate"   id="collectDate">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="carLink" class="layui-form-label">
+                <span class="we-red">*</span>车辆联系人
+            </label>
+            <div class="layui-input-inline">
+                <select name="carLink" lay-verify="required" id="carLink" lay-filter="carLink">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="carLinkPhone" class="layui-form-label">
+                <span class="we-red">*</span>联系方式
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="carLinkPhone" id="carLinkPhone" lay-verify="required" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="shiptoDate" class="layui-form-label">
+                运抵时间
+            </label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  name="shiptoDate"   id="shiptoDate">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                是否必接单
+            </label>
+            <input type="radio" name="mustReceipt" value="0" title="否" checked>
+            <input type="radio" name="mustReceipt" value="1" title="是">
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                是否启用临时竞标模式
+            </label>
+            <input type="radio" name="tempBigPrice" value="0" title="否" checked>
+            <input type="radio" name="tempBigPrice" value="1" title="是">
+        </div>
+        <div class="layui-form-item">
+            <label for="status" class="layui-form-label">
+                <span class="we-red">*</span>状态
+            </label>
+            <div class="layui-input-inline">
+                <select name="status" id="status" lay-verify="required" lay-filter="level-select">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="remarks" class="layui-form-label">
+                说明
+            </label>
+            <div class="layui-input-inline">
+                    <textarea type="input" id="remarks" name="remarks" autocomplete="off"
+                              class="layui-input"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: center;">
+            <button class="layui-btn" id="editForm" lay-filter="editForm" lay-submit="">保存</button>
+        </div>
+    </form>
+</div>
+<script src="../../static/layui/layui.js" charset="utf-8"></script>
+<script src="../../static/base/js/common.js" charset="utf-8"></script>
+<script type="text/javascript">
+
+    layui.use(['jquery', 'form', 'layer'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            layer = layui.layer;
+
+        //自定义验证规则
+        form.verify({
+            name: function (value, item) { //value：表单的值、item：表单的DOM对象
+                if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
+                    return '用户名不能有特殊字符';
+                }
+                if (/(^\_)|(\__)|(\_+$)/.test(value)) {
+                    return '用户名首尾不能出现下划线\'_\'';
+                }
+                if (/^\d+\d+\d$/.test(value)) {
+                    return '用户名不能全为数字';
+                }
+            }
+        });
+
+
+        form.on('select(orgId)', function(data){
+            initFunction.getSelectList(true,form, '/bu/carTransportRelease/getList?orgId='+data.value, 'goodsId');
+        });
+
+        //页面初始化加载
+        $(function () {
+            setTimeout(function () {
+                frameVal();
+            }, 300);
+        });
+
+        function frameVal() {
+            var id = $('input[name="id"]').val();
+            if (id != undefined && id > 0) {
+                $.ajax({
+                    url: "/bu/transportOrder/getById?id=" + id,
+                    type: 'GET',
+                    dataType: "json",
+                    success: function (re) {
+                        if (re.code == 200) {
+                            form.val("showForm", re.data);
+                            initFunction.initLayDate('receiptDate','yyyy-MM-dd hh:mm:ss');
+                            initFunction.initLayDate('feedbackDate','yyyy-MM-dd hh:mm:ss');
+                            initFunction.initLayDate('carArriveDate','yyyy-MM-dd hh:mm:ss');
+                            initFunction.initLayDate('takeGoodsDate','yyyy-MM-dd hh:mm:ss');
+                            initFunction.initLayDate('planCollectDate','yyyy-MM-dd hh:mm:ss');
+                            initFunction.initLayDate('shiptoDate','yyyy-MM-dd hh:mm:ss');
+                            initFunction.initLayDate('collectDate','yyyy-MM-dd hh:mm:ss');
+                            initFunction.getSelectList(true,form, '/org/getList', 'orgId',re.data.orgId);
+                            initFunction.getSelectList(true,form, '/bu/car/getList', 'carId',re.data.carId,'car');
+                            initFunction.getSelectList(true,form, '/bu/releaseLine/getList', 'lineId',re.data.lineId,'line');
+                            initFunction.getSelectList(true,form, '/bu/carDriver/getList', 'driverId',re.data.driverId);
+                            initFunction.getSelectList(true,form, '/bu/carTransportRelease/getList?orgId='+re.data.orgId, 'goodsId',re.data.goodsId);
+                            form.render();
+                        } else {
+                            layer.msg(re.msg);
+                        }
+                    }
+                });
+            }
+        }
+
+        //监听提交
+        form.on('submit(editForm)', function (data) {
+            $.ajax({
+                url: '/bu/transportOrder/save',
+                type: 'POST',
+                data: data.field,
+                dataType: "json",
+                success: function (result) {
+                    if (result.code == 200) {
+                        layer.msg('保存成功', {
+                            icon: 6,
+                            time: 1500
+                        }, function () {
+                            parent.layui.table.reload('transportOrderTable', {page: {curr: 1}});
+                            // 获得frame索引
+                            //关闭当前frame
+                            parent.layer.close(parent.layer.getFrameIndex(window.name));
+                        });
+                    } else {
+                        layer.msg(result.msg);
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

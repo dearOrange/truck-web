@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>添加仓库信息</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../../static/base/css/font.css">
+    <link rel="stylesheet" href="../../static/base/css/my.css">
+    <link rel="stylesheet" href="../../static/base/css/formSelects.css">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="my-body">
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <label for="memberId" class="layui-form-label">
+                <span class="we-red">*</span>仓主
+            </label>
+            <div class="layui-input-inline">
+                <select name="memberId" id="memberId" lay-verify="required" lay-filter="level-select">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="orgId" class="layui-form-label">
+                <span class="we-red">*</span>企业
+            </label>
+            <div class="layui-input-inline">
+                <select name="orgId" id="orgId" lay-verify="required" lay-filter="level-select">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label">
+                <span class="we-red">*</span>仓库名称
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="name" name="name" required="" lay-verify="required|name"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="provincialId" class="layui-form-label">
+                <span class="we-red">*</span>所在省
+            </label>
+            <div class="layui-input-inline">
+                <select name="provincialId" lay-verify="required" lay-filter="provincialId" id="provincialId">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="cityId" class="layui-form-label">
+                <span class="we-red">*</span>所在市
+            </label>
+            <div class="layui-input-inline">
+                <select name="cityId" lay-verify="required" id="cityId" lay-filter="cityId">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="countyId" class="layui-form-label">
+                <span class="we-red">*</span>所在县
+            </label>
+            <div class="layui-input-inline">
+                <select name="countyId" lay-verify="required" id="countyId"  lay-filter="countyId">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="address" class="layui-form-label">
+                <span class="we-red">*</span>详细地址
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="address" id="address"  required="" lay-verify="required|address"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                乡镇（街道）-村（社区）-楼号-门牌号
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="total_area" class="layui-form-label">
+                <span class="we-red">*</span>总面积
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="totalArea" id="total_area" lay-verify="number|required"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                ㎡
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="can_use" class="layui-form-label">
+                <span class="we-red">*</span>可用面积
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="canUse" id="can_use" lay-verify="number|required"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                ㎡
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="total_volume" class="layui-form-label">
+                总容积
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="totalVolume" id="total_volume" lay-verify="number"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                m³
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="empty_volume" class="layui-form-label">
+                空置容积
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="emptyVolume" id="empty_volume" lay-verify="number"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                m³
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="mng_type" class="layui-form-label">
+                经营类型
+            </label>
+            <div class="layui-input-inline">
+                <select name="mngType" id="mng_type" lay-filter="level-select">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="warehouse_type" class="layui-form-label">
+                <span class="we-red">*</span>仓库类型
+            </label>
+            <div class="layui-input-inline">
+                <select name="warehouseType" id="warehouse_type" lay-verify="required" lay-filter="level-select">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="warehouse_high" class="layui-form-label">
+                <span class="we-red">*</span>库高
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="warehouseHigh" id="warehouse_high" lay-verify="number|required"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                m
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="warehouse_length" class="layui-form-label">
+                库长
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="warehouseLength" id="warehouse_length" lay-verify="number"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                m
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="warehouse_width" class="layui-form-label">
+                库宽
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="warehouseWidth" id="warehouse_width" lay-verify="number"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                m
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="build_type" class="layui-form-label">
+                建筑类型
+            </label>
+            <div class="layui-input-inline">
+                <select name="buildType" id="build_type" lay-filter="level-select">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="build_structure" class="layui-form-label">
+                建筑结构
+            </label>
+            <div class="layui-input-inline">
+                <select name="buildStructure" id="build_structure" lay-filter="level-select">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="storehouse_stuff" class="layui-form-label">
+                仓顶材质
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="storehouseStuff" id="storehouse_stuff"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="storage_way" class="layui-form-label">
+                存放形式
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="storageWay" id="storage_way"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                是否可分割
+            </label>
+            <input type="radio" name="isCut" id="isCut1" value="1" title="可以">
+            <input type="radio" name="isCut" id="isCut0" value="0" title="不可以">
+        </div>
+        <div class="layui-form-item">
+            <label for="warehouse_model" class="layui-form-label">
+                仓库模式
+            </label>
+            <div class="layui-input-inline">
+                <select name="warehouseModel" id="warehouse_model" lay-filter="warehouse_model">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="warehouse_floor" class="layui-form-label">
+                仓库地坪
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="warehouseFloor" id="warehouse_floor"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <!--物品种类没写-->
+        <div class="layui-form-item">
+            <label for="price" class="layui-form-label">
+                价格
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="price" id="price" lay-verify="number"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                元
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                是否有仓配服务
+            </label>
+            <input type="radio" id="hasService1" name="hasService" value="1" title="有">
+            <input type="radio" id="hasService0" name="hasService" value="0" title="没有">
+        </div>
+        <div class="layui-form-item" style="text-align: center;">
+            <button class="layui-btn" lay-filter="addForm" lay-submit="">增加</button>
+        </div>
+    </form>
+</div>
+<script src="../../static/layui/layui.js" charset="utf-8"></script>
+<script src="../../static/base/js/common.js" charset="utf-8"></script>
+<script type="text/javascript">
+    layui.use(['jquery', 'form', 'layer'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            layer = layui.layer;
+
+        form.render();
+        //自定义验证规则
+        form.verify({
+            name: function (value, item) { //value：表单的值、item：表单的DOM对象
+                if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
+                    return '用户名不能有特殊字符';
+                }
+                if (/(^\_)|(\__)|(\_+$)/.test(value)) {
+                    return '用户名首尾不能出现下划线\'_\'';
+                }
+                if (/^\d+\d+\d$/.test(value)) {
+                    return '用户名不能全为数字';
+                }
+            }
+            // , mobile: [/^1(?:3\d|4[4-9]|5[0-35-9]|6[67]|7[013-8]|8\d|9\d)\d{8}$/, '手机号码格式不正式']
+            // , number: [/(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/, '证件号码格式有误']
+            // , isMob: [/^0?1[3|4|5|8][0-9]\d{8}$/, '电话格式有误']
+
+        });
+
+        //监听提交
+        form.on('submit(addForm)', function (data) {
+            $.ajax({
+                url: '/bu/warehouse/save',
+                type: 'POST',
+                data: data.field,
+                dataType: "json",
+                success: function (result) {
+                    if (result.code == 200) {
+                        layer.msg('添加成功', {
+                            icon: 6,
+                            time: 1500
+                        }, function () {
+                            parent.layui.table.reload('warehouseTable', {page: {curr: 1}});
+                            // 获得frame索引
+                            //关闭当前frame
+                            parent.layer.close(parent.layer.getFrameIndex(window.name));
+                        });
+                    } else {
+                        layer.msg(result.msg);
+                    }
+                }
+            });
+            return false;
+        });
+        $(document).ready(function () {
+            setTimeout(function () {
+                initPage();
+            }, 300);
+        });
+
+        function initPage() {
+            initFunction.getSelectList(true,form, '/member/getList', 'memberId');
+            initFunction.getSelectList(true,form, '/org/getList', 'orgId');
+            initFunction.getDictSelectList(true,form, 'MNG_TYPE', 'mng_type');//经营类型
+            initFunction.getDictSelectList(true,form, 'WAREHOUSE_TYPE', 'warehouse_type');
+            initFunction.getDictSelectList(true,form, 'BUILD_TYPE', 'build_type');//建筑类型
+            initFunction.getDictSelectList(true,form, 'BUILD_STRUCTURE', 'build_structure');//建筑类型
+            initFunction.getDictSelectList(true,form, 'WAREHOUSE_MODEL', 'warehouse_model');//仓库模式
+            initFunction.getSelectAreaTree(true,form, 'provincialId', {level: "1"});
+        }
+
+        form.on('select(provincialId)', function (data) {
+            initFunction.getSelectAreaTree(true,form, 'cityId', {level: "2", pid: data.value});
+            $("#countyId").empty();
+            $("#cityId").empty();
+        });
+
+        form.on('select(cityId)', function (data) {
+            initFunction.getSelectAreaTree(true,form, 'countyId', {level: "3", pid: data.value});
+            $("#countyId").empty();
+        });
+    });
+</script>
+</body>
+</html>

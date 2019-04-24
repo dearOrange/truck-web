@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>仓库需求明细查看</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../../../static/base/css/font.css">
+    <link rel="stylesheet" href="../../../static/base/css/my.css">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="my-body">
+    <form class="layui-form" lay-filter="showForm">
+        <input type="hidden" name="id" id="id" value=""/>
+        <input type="hidden" name="orgId" id="orgId" value=""/>
+        <div class="layui-form-item">
+            <label for="warehouseType" class="layui-form-label">
+                仓库类型
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="warehouseTypeName" id="warehouseType" readonly="true"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="minPrice" class="layui-form-label">
+                最低价格
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="minPrice" id="minPrice" readonly="true"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                元
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="maxPrice" class="layui-form-label">
+                <span class="we-red">*</span>最高价格
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="maxPrice" id="maxPrice"  lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                元
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="useArea" class="layui-form-label">
+                可用面积
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="useArea" id="useArea"  readonly="true" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                ㎡
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="maxTemper" class="layui-form-label">
+               起租面积
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="maxTemper" id="maxTemper"  readonly="true" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+               ㎡
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="useVolume" class="layui-form-label">
+                可用容积
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="useVolume" id="useVolume"   readonly="true" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                m³
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="remarks" class="layui-form-label">
+                说明
+            </label>
+            <div class="layui-input-inline">
+                <textarea type="input" id="remarks" name="remarks"  readonly="true"  autocomplete="off" class="layui-input"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="../../../static/layui/layui.js" charset="utf-8"></script>
+<script src="../../../static/base/js/common.js" charset="utf-8"></script>
+<script type="text/javascript">
+
+    layui.use(['jquery', 'form'], function () {
+        var $ = layui.jquery,
+            form = layui.form;
+
+        //页面初始化加载
+        $(function () {
+            setTimeout(function () {
+                frameVal();
+            }, 300);
+        });
+
+        function frameVal() {
+            var id = $('input[name="id"]').val();
+            if (id != undefined && id > 0) {
+                $.ajax({
+                    url:"/bu/warehouseRelease/info/getById?id=" + id,
+                    type: 'GET',
+                    dataType : "json",
+                    success: function (re) {
+                        if (re.code == 200) {
+                            form.val("showForm", re.data);
+                            form.render();
+                        } else {
+                            layer.msg(re.msg);
+                        }
+                    }
+                });
+            }
+        }
+    });
+</script>
+</body>
+</html>

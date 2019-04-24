@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>运单KPI添加</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../../static/base/css/font.css">
+    <link rel="stylesheet" href="../../static/base/css/my.css">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="my-body">
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <label for="lineId" class="layui-form-label">
+                <span class="we-red">*</span>线路
+            </label>
+            <div class="layui-input-inline">
+                <select name="lineId" id="lineId" lay-verify="required" lay-filter="level-select">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="orderId" class="layui-form-label">
+                <span class="we-red">*</span>单号
+            </label>
+            <div class="layui-input-inline">
+                <select name="orderId" id="orderId" lay-verify="required" lay-filter="level-select">
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="feedbackTimes" class="layui-form-label">
+                <span class="we-red">*</span>车辆反馈时间
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="feedbackTimes" id="feedbackTimes" autocomplete="off" lay-verify="number" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                小时
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="drivingTimes" class="layui-form-label">
+                <span class="we-red">*</span>线路发货时间
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="drivingTimes" id="drivingTimes" autocomplete="off" lay-verify="number" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                小时
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="takeOnTimes" class="layui-form-label">
+                <span class="we-red">*</span>提货准点率
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="takeOnTimes" id="takeOnTimes" autocomplete="off" lay-verify="number" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                %
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="tempAdvanceTimes" class="layui-form-label">
+                <span class="we-red">*</span>临时竞标提前时间
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="tempAdvanceTimes" id="tempAdvanceTimes" autocomplete="off" lay-verify="number" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                小时
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="electronReturnTimes" class="layui-form-label">
+                <span class="we-red">*</span>电子返单时间
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="electronReturnTimes" id="electronReturnTimes" autocomplete="off" lay-verify="number" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                小时
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="lineMomeRate" class="layui-form-label">
+                <span class="we-red">*</span>线路发货接单率
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="lineMomeRate" id="lineMomeRate" autocomplete="off" lay-verify="number" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                %
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="paperReturnTimes" class="layui-form-label">
+                <span class="we-red">*</span>纸质返单时间
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="paperReturnTimes" id="paperReturnTimes" autocomplete="off" lay-verify="number" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                小时
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="maxCollectTimes" class="layui-form-label">
+                <span class="we-red">*</span>最长确认收货时间
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="maxCollectTimes" id="maxCollectTimes" autocomplete="off" lay-verify="number" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                小时
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="arriveOnTimes" class="layui-form-label">
+                <span class="we-red">*</span>达到准点率
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="arriveOnTimes" id="arriveOnTimes" autocomplete="off" lay-verify="number" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                %
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="assessTocarDate" class="layui-form-label">
+                车主评价时间
+            </label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  name="assessTocarDate"   id="assessTocarDate">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="carContent" class="layui-form-label">
+                <span class="we-red">*</span>车主评价内容
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="carContent" id="carContent" lay-verify="required" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="carStats" class="layui-form-label">
+                <span class="we-red">*</span>车主星级
+            </label>
+            <div class="layui-input-inline">
+                <select name="carStats" lay-verify="required" id="carStats" lay-filter="collectMan">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="assessTocarTip" class="layui-form-label">
+                <span class="we-red">*</span>车主评价标签
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="assessTocarTip" id="assessTocarTip" lay-verify="required" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="assessTogoodsDate" class="layui-form-label">
+                货主评价时间
+            </label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  name="assessTogoodsDate"   id="assessTogoodsDate">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="goodsContent" class="layui-form-label">
+                <span class="we-red">*</span>货主评价内容
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="goodsContent" id="goodsContent" lay-verify="required" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="goodsStats" class="layui-form-label">
+                <span class="we-red">*</span>货主星级
+            </label>
+            <div class="layui-input-inline">
+                <select name="goodsStats" lay-verify="required" id="goodsStats" lay-filter="collectMan">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="assessTogoodsTip" class="layui-form-label">
+                <span class="we-red">*</span>货评价标签
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="assessTogoodsTip" id="assessTogoodsTip" lay-verify="required" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                是否有纠纷
+            </label>
+            <input type="radio" name="hasDispute" value="0" title="否" checked>
+            <input type="radio" name="hasDispute" value="1" title="是">
+        </div>
+        <div class="layui-form-item">
+            <label for="mediateTrack" class="layui-form-label">
+                平台调解跟踪
+            </label>
+            <div class="layui-input-inline">
+                <textarea type="input" id="mediateTrack" name="mediateTrack" autocomplete="off" class="layui-input"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="disputeContent" class="layui-form-label">
+                纠纷内容
+            </label>
+            <div class="layui-input-inline">
+                <textarea type="input" id="disputeContent" name="disputeContent" autocomplete="off" class="layui-input"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="disputeResults" class="layui-form-label">
+                <span class="we-red">*</span>处理结果
+            </label>
+            <div class="layui-input-inline">
+                <select name="disputeResults" id="disputeResults" lay-verify="required" lay-filter="level-select">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="remarks" class="layui-form-label">
+                说明
+            </label>
+            <div class="layui-input-inline">
+                <textarea type="input" id="remarks" name="remarks" autocomplete="off" class="layui-input"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: center;">
+            <button class="layui-btn" lay-filter="addForm" lay-submit="">增加</button>
+        </div>
+    </form>
+</div>
+<script src="../../static/layui/layui.js" charset="utf-8"></script>
+<script src="../../static/base/js/common.js" charset="utf-8"></script>
+<script type="text/javascript">
+    layui.use(['jquery','form','layer'], function(){
+        var $ = layui.jquery,
+            form = layui.form,
+            layer = layui.layer;
+
+        form.render();
+        //自定义验证规则
+        form.verify({
+            name:function(value, item){ //value：表单的值、item：表单的DOM对象
+                if(!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)){
+                    return '用户名不能有特殊字符';
+                }
+                if(/(^\_)|(\__)|(\_+$)/.test(value)){
+                    return '用户名首尾不能出现下划线\'_\'';
+                }
+                if(/^\d+\d+\d$/.test(value)){
+                    return '用户名不能全为数字';
+                }
+            }
+            ,mobile:[/^1(?:3\d|4[4-9]|5[0-35-9]|6[67]|7[013-8]|8\d|9\d)\d{8}$/,'手机号码格式不正式']
+        });
+
+        //监听提交
+        form.on('submit(addForm)', function(data){
+            $.ajax({
+                url: '/bu/transportKPI/save',
+                type: 'POST',
+                data: data.field,
+                dataType : "json",
+                success: function (result) {
+                    if (result.code == 200) {
+                        layer.msg('添加成功', {
+                            icon: 6,
+                            time: 1500
+                        }, function () {
+                            parent.layui.table.reload('transportKPITable',{page: {curr: 1}});
+                            // 获得frame索引
+                            //关闭当前frame
+                            parent.layer.close(parent.layer.getFrameIndex(window.name));
+                        });
+                    } else {
+                        layer.msg(result.msg);
+                    }
+                }
+            });
+            return false;
+        });
+        $(document).ready(function () {
+            setTimeout(function () {
+                initPage();
+            }, 300);
+        });
+
+        function initPage(){
+            initFunction.getSelectList(true,form, '/bu/releaseLine/getList', 'lineId','0','line');
+            initFunction.getSelectList(true,form, '/bu/transportOrder/getList', 'orderId','0','order');
+            initFunction.initLayDate('assessTocarDate','yyyy-MM-dd HH:mm:ss','datetime');
+            initFunction.initLayDate('assessTogoodsDate','yyyy-MM-dd HH:mm:ss','datetime');
+        }
+    });
+</script>
+</body>
+</html>

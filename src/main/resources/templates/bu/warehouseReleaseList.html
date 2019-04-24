@@ -1,0 +1,82 @@
+<div class="layui-row layui-col-space10">
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-row">
+                <div class="layui-form layui-col-md12 my-search">
+                    <div class="layui-inline">
+                    <input class="layui-input" placeholder="开始日期" name="startDate" id="startDate">
+                    </div>
+                    <div class="layui-inline">
+                    <input class="layui-input" placeholder="结束日期" name="endDate" id="endDate">
+                    </div>
+                    <div class="layui-inline">
+                        <input type="text" name="name" id="name" placeholder="请输入查询信息" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                    <button class="layui-btn" id="queryWarehouseReleaseList"><i class="layui-icon">&#xe615;</i>查询
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <table id="warehouseReleaseTable" lay-filter="warehouseRelease_table_filter"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var url = '/bu/warehouseRelease',
+        cols = [
+            [ //表头
+                {type: 'checkbox', fixed: 'left'}
+                , {field: 'name', title: '仓库',}
+                , {field: 'leaseArea', title: '总面积',}
+                , {field: 'rentingArea', title: '可租面积',}
+                , {field: 'startDate', title: '起始日期',}
+                , {field: 'endDate', title: '结束日期',}
+                , {field: 'useDate', title: '可用日期',}
+                , {field: 'minLeaseTerm', title: '最短租期',}
+                , {field: 'settlementMethod', title: '结算方式',}
+                , {field: 'depositRate', title: '订金金额',}
+                , {field: 'createDate', title: '创建时间', sort: true}
+                , {field: 'opt', title: '操作', width: 240, fixed: 'right', toolbar: '#opt-wr-btn', unresize: true}
+            ]
+        ],
+        title = '仓库出租明细', prefix = 'warehouseRelease';
+
+    layui.$(function () {
+        setTimeout(function () {
+            initPage();
+        }, 300);
+
+        layui.$('#queryWarehouseReleaseList').click(function () {
+            var val = layui.$('#name').val();//获取输入框的值
+            initFunction.reloadTableList({name: val}, '/bu/warehouseRelease/getList4Page', 'warehouseReleaseTable', 'GET');
+        });
+    });
+
+    function initPage() {
+        initFunction.initLayDate('startDate','yyyy-MM-dd');
+        initFunction.initLayDate('endDate','yyyy-MM-dd');
+        initFunction.initTable(prefix, url, cols);
+        initFunction.tableToolBarOnEvent(prefix, url, title);
+        initFunction.tableToolEvent(prefix, url, title);
+    }
+</script>
+<script type="text/html" id="opt-wr-btn">
+    <button class="layui-btn layui-btn layui-btn-sm" value="查看" lay-event="btn_view">
+        <i class="layui-icon">&#xe615;</i>
+    </button>
+    <button class="layui-btn layui-btn layui-btn-sm" value="明细" lay-event="btn_view_detail">
+        <i class="layui-icon">&#xe656;</i>
+    </button>
+    <button class="layui-btn layui-btn-normal layui-btn-sm" value="编辑" lay-event="btn_edit">
+        <i class="layui-icon">&#xe642;</i>
+    </button>
+    <button class="layui-btn layui-btn-danger layui-btn-sm" value="删除" lay-event="btn_del">
+        <i class="layui-icon"></i>
+    </button>
+</script>

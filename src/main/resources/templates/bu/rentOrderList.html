@@ -1,0 +1,78 @@
+<div class="layui-row layui-col-space10">
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-row">
+                <div class="layui-form layui-col-md12 my-search">
+                    <div class="layui-inline">
+                        <input type="text" name="name" id="name" placeholder="请输入查询信息" autocomplete="off"
+                               class="layui-input">
+                    </div>
+                    <button class="layui-btn" id="queryRentOrderList"><i class="layui-icon">&#xe615;</i>查询</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <table id="rentOrderTable" lay-filter="rentOrder_table_filter"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var url = '/bu/rentOrder',
+        cols = [
+            [ //表头
+                {type: 'checkbox', fixed: 'left'}
+                , {field: 'orderCode', title: '单号',}
+                , {field: 'warehouseName', title: '仓库',}
+                , {field: 'goodsName', title: '货品',}
+                , {field: 'orgName', title: '货主',}
+                , {field: 'createDate', title: '下单时间', sort: true}
+                , {field: 'startRentDate', title: '起租时间',}
+                , {field: 'endRentDate', title: '结束时间',}
+                , {field: 'shiptoDate', title: '运抵时间',}
+                , {field: 'inWarehouseDate', title: '入库时间',}
+                , {field: 'outWarehouseDate', title: '出库时间',}
+                , {field: 'startChargingDate', title: '计费起始时间',}
+                , {field: 'rentArea', title: '承租总面积',}
+                , {field: 'totalCapacity', title: '总容积',}
+                , {field: 'amount', title: '总价',}
+                , {field: 'status', title: '状态',}
+                , {field: 'opt', title: '操作', width: 180, fixed: 'right', toolbar: '#opt-btn', unresize: true}
+            ]
+        ],
+        title = '租赁订单',prefix= 'rentOrder';
+
+    layui.$(function () {
+        setTimeout(function () {
+            initPage();
+        }, 300);
+
+        layui.$('#queryRentOrderList').click(function () {
+            var val = layui.$('#name').val();//获取输入框的值
+            initFunction.reloadTableList({name: val}, '/bu/rentOrder/getList4Page', 'rentOrderTable', 'GET');
+        });
+    });
+
+    function initPage() {
+        initFunction.initTable(prefix, url, cols,'renttabletoolbar');
+        initFunction.tableToolBarOnEvent(prefix,url, title);
+        initFunction.tableToolEvent(prefix,url, title);
+    }
+</script>
+
+
+<script type="text/html" id="renttabletoolbar">
+    <div class="layui-btn-container">
+        <button class="layui-btn" lay-event="receiptButton"><i class="layui-icon">&#xe619;</i>催接单</button>
+        <button class="layui-btn" lay-event="feedbackButton"><i class="layui-icon">&#xe63a;</i>催反馈</button>
+        <button class="layui-btn" lay-event="cancelButton"><i class="layui-icon">&#x1007;</i>取消订单</button>
+        <button class="layui-btn" lay-event="backButton"><i class="layui-icon">&#xe65c;</i>退单</button>
+        <button class="layui-btn" lay-event="evaluateButton"><i class="layui-icon">&#xe611;</i>评价</button>
+        <button class="layui-btn" lay-event="addButton"><i class="layui-icon">&#xe654;</i>创建订单</button>
+        <!--<button class="layui-btn" lay-event="addGoodsButton"><i class="layui-icon">&#xe654;</i>货主创建运单</button>-->
+        <!--<button class="layui-btn" lay-event="addCarButton"><i class="layui-icon">&#xe654;</i>车主创建运单</button>-->
+    </div>
+</script>

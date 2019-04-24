@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>租赁订单编辑</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../../static/base/css/font.css">
+    <link rel="stylesheet" href="../../static/base/css/my.css">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="my-body">
+    <form class="layui-form" lay-filter="showForm">
+        <input type="hidden" name="id" id="id" value=""/>
+        <div class="layui-form-item">
+            <label for="needId" class="layui-form-label">
+                <span class="we-red">*</span>货品
+            </label>
+            <div class="layui-input-inline">
+                <select name="needId" id="needId" lay-filter="needId" lay-verify="required">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="orgId" class="layui-form-label">
+                <span class="we-red">*</span>货主
+            </label>
+            <div class="layui-input-inline">
+                <select name="orgId" id="orgId" lay-filter="orgId" lay-verify="required">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="warehouseId" class="layui-form-label">
+                <span class="we-red">*</span>仓库
+            </label>
+            <div class="layui-input-inline">
+                <select name="warehouseId" id="warehouseId" lay-filter="warehouseId" lay-verify="required">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="seeWarehouseId" class="layui-form-label">
+                看库记录
+            </label>
+            <div class="layui-input-inline">
+                <select name="seeWarehouseId" id="seeWarehouseId" lay-filter="seeWarehouseId" lay-verify="">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="create_date" class="layui-form-label">
+                <span class="we-red">*</span>下单时间
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="create_date" name="createDate" lay-verify="required"  class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="start_rent_date" class="layui-form-label">
+                <span class="we-red">*</span>起租时间
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="start_rent_date" name="startRentDate" lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="end_rent_date" class="layui-form-label">
+                结束时间
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="end_rent_date" name="endRentDate"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="shipto_date" class="layui-form-label">
+                运抵时间
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="shipto_date" name="shiptoDate"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="in_warehouse_date" class="layui-form-label">
+                入库时间
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="in_warehouse_date" name="inWarehouseDate"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="out_warehouse_date" class="layui-form-label">
+                出库时间
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="out_warehouse_date" name="outWarehouseDate"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="start_charging_date" class="layui-form-label">
+                计费起始时间
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="start_charging_date" name="startChargingDate"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="rent_area" class="layui-form-label">
+                承租总面积
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="rent_area" name="rentArea" lay-verify="number"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                ㎡
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="total_capacity" class="layui-form-label">
+                总容积
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="total_capacity" name="totalCapacity" lay-verify="number"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                m³
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="amount" class="layui-form-label">
+                总价
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="amount" name="amount" lay-verify="number"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                元
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: center;">
+            <button class="layui-btn" id="editForm" lay-filter="editForm" lay-submit="">保存</button>
+        </div>
+    </form>
+</div>
+<script src="../../static/layui/layui.js" charset="utf-8"></script>
+<script src="../../static/base/js/common.js" charset="utf-8"></script>
+<script type="text/javascript">
+
+    layui.use(['jquery', 'form', 'layer'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            layer = layui.layer;
+
+        //自定义验证规则
+        form.verify({
+            name: function (value, item) { //value：表单的值、item：表单的DOM对象
+                if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
+                    return '用户名不能有特殊字符';
+                }
+                if (/(^\_)|(\__)|(\_+$)/.test(value)) {
+                    return '用户名首尾不能出现下划线\'_\'';
+                }
+                if (/^\d+\d+\d$/.test(value)) {
+                    return '用户名不能全为数字';
+                }
+            }
+        });
+
+        //页面初始化加载
+        $(function () {
+            setTimeout(function () {
+                frameVal();
+            }, 300);
+        });
+
+        form.on('select(warehouseId)', function(data){
+            initFunction.getSelectList(true,form, '/bu/seeWarehouse/getList?warehouseId='+data.value, 'seeWarehouseId','0','seeWarehouse');
+        });
+
+        function frameVal() {
+            var id = $('input[name="id"]').val();
+            if (id != undefined && id > 0) {
+                $.ajax({
+                    url: "/bu/rentOrder/getById?id=" + id,
+                    type: 'GET',
+                    dataType: "json",
+                    success: function (re) {
+                        if (re.code == 200) {
+                            form.val("showForm", re.data);
+                            initFunction.getSelectList(true,form, '/bu/warehouseNeed/getList', 'needId',re.data.needId,'warehouseNeed');
+                            initFunction.getSelectList(true,form, '/bu/warehouse/getList', 'warehouseId',re.data.warehouseId);
+                            initFunction.getSelectList(true,form, '/org/getList', 'orgId',re.data.orgId);
+                            initFunction.initLayDate('create_date','yyyy-MM-dd HH:mm:ss','datetime');
+                            initFunction.initLayDate('start_rent_date','yyyy-MM-dd');
+                            initFunction.initLayDate('shipto_date','yyyy-MM-dd HH:mm:ss','datetime');
+                            initFunction.initLayDate('in_warehouse_date','yyyy-MM-dd HH:mm:ss','datetime');
+                            initFunction.initLayDate('end_rent_date','yyyy-MM-dd');
+                            initFunction.initLayDate('out_warehouse_date','yyyy-MM-dd HH:mm:ss','datetime');
+                            initFunction.initLayDate('start_charging_date','yyyy-MM-dd');
+                            initFunction.getSelectList(true,form, '/bu/seeWarehouse/getList?warehouseId='+re.data.warehouseId, 'seeWarehouseId',re.data.seeWarehouseId,'seeWarehouse');
+                            form.render();
+                        } else {
+                            layer.msg(re.msg);
+                        }
+                    }
+                });
+            }
+        }
+
+        //监听提交
+        form.on('submit(editForm)', function (data) {
+            $.ajax({
+                url: '/bu/rentOrder/save',
+                type: 'POST',
+                data: data.field,
+                dataType: "json",
+                success: function (result) {
+                    if (result.code == 200) {
+                        layer.msg('保存成功', {
+                            icon: 6,
+                            time: 1500
+                        }, function () {
+                            parent.layui.table.reload('rentOrderTable', {page: {curr: 1}});
+                            // 获得frame索引
+                            //关闭当前frame
+                            parent.layer.close(parent.layer.getFrameIndex(window.name));
+                        });
+                    } else {
+                        layer.msg(result.msg);
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>
+</body>
+</html>

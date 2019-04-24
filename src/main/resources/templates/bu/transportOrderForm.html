@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>运单查看</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../../static/base/css/font.css">
+    <link rel="stylesheet" href="../../static/base/css/my.css">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="my-body">
+    <form class="layui-form" lay-filter="showForm">
+        <input type="hidden" name="id" id="id" value=""/>
+        <div class="layui-form-item">
+            <label for="orgId" class="layui-form-label">
+                货主
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="orgId" name="orgName" readonly="true"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="goodsName" class="layui-form-label">
+                货品名称
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="goodsName" name="goodsName" readonly="true"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="carId" class="layui-form-label">
+                车辆
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="carId" name="carName" readonly="true"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="driverId" class="layui-form-label">
+                司机
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="driverId" name="driverName" readonly="true"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="lineId" class="layui-form-label">
+                线路
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="lineId" name="lineName" readonly="true"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="orderType" class="layui-form-label">
+                成单类型
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="orderType" name="orderTypeName" readonly="true"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="transportType" class="layui-form-label">
+                运输方式
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="transportType" name="transportTypeName" readonly="true"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="num" class="layui-form-label">
+                数量
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="num" id="num" autocomplete="off" readonly="true" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="unit" class="layui-form-label">
+                数量单位
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="unit" id="unit" autocomplete="off"  readonly="true" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="amount" class="layui-form-label">
+                价格
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="amount" id="amount" readonly="true" autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                元
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="receiptDate" class="layui-form-label">
+                接单时间
+            </label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  name="receiptDate" readonly="true" id="receiptDate">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="feedbackDate" class="layui-form-label">
+                反馈时间
+            </label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  name="feedbackDate" readonly="true"  id="feedbackDate">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="carArriveDate" class="layui-form-label">
+                车辆到达时间
+            </label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  name="carArriveDate" readonly="true" id="carArriveDate">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="takeGoodsMan" class="layui-form-label">
+                提货人
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="takeGoodsMan" id="takeGoodsMan" readonly="true" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="takeManPhone" class="layui-form-label">
+                联系方式
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="takeManPhone" id="takeManPhone" readonly="true" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="takeGoodsDate" class="layui-form-label">
+                提货时间
+            </label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  name="takeGoodsDate" readonly="true"  id="takeGoodsDate">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="collectMan" class="layui-form-label">
+                收货人
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="collectMan" id="collectMan" readonly="true" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="collectManPhone" class="layui-form-label">
+                联系方式
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="collectManPhone" id="collectManPhone" readonly="true"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="planCollectDate" class="layui-form-label">
+                计划收货时间
+            </label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  name="planCollectDate" readonly="true"  id="planCollectDate">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="collectDate" class="layui-form-label">
+                收货时间
+            </label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  name="collectDate"  readonly="true" id="collectDate">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="carLink" class="layui-form-label">
+                车辆联系人
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="carLink" id="carLink" readonly="true" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="carLinkPhone" class="layui-form-label">
+                联系方式
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="carLinkPhone" id="carLinkPhone" readonly="true" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="shiptoDate" class="layui-form-label">
+                运抵时间
+            </label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  name="shiptoDate"  readonly="true"  id="shiptoDate">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                是否必接单
+            </label>
+            <input type="radio" name="mustReceipt" value="0" title="否" checked>
+            <input type="radio" name="mustReceipt" value="1" title="是">
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                是否启用临时竞标模式
+            </label>
+            <input type="radio" name="tempBigPrice" value="0" title="否" checked>
+            <input type="radio" name="tempBigPrice" value="1" title="是">
+        </div>
+        <div class="layui-form-item">
+            <label for="status" class="layui-form-label">
+                状态
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="statusName" id="status" readonly="true" autocomplete="off"
+                       class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="remarks" class="layui-form-label">
+                说明
+            </label>
+            <div class="layui-input-inline">
+                    <textarea type="input" id="remarks" name="remarks" autocomplete="off" readonly="true"
+                              class="layui-input"></textarea>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="../../static/layui/layui.js" charset="utf-8"></script>
+<script src="../../static/base/js/common.js" charset="utf-8"></script>
+<script type="text/javascript">
+
+    layui.use(['jquery', 'form'], function () {
+        var $ = layui.jquery,
+            form = layui.form;
+
+        //页面初始化加载
+        $(function () {
+            setTimeout(function () {
+                frameVal();
+            }, 300);
+        });
+
+        function frameVal() {
+            var id = $('input[name="id"]').val();
+            if (id != undefined && id > 0) {
+                $.ajax({
+                    url:"/bu/transportOrder/getById?id=" + id,
+                    type: 'GET',
+                    dataType : "json",
+                    success: function (re) {
+                        if (re.code == 200) {
+                            form.val("showForm", re.data);
+                            initFunction.getSelectList(true,form, '/org/getList', 'orgId',re.data.orgId);
+                            initFunction.getSelectList(true,form, '/bu/car/getList', 'carId',re.data.carId,'car');
+                            initFunction.getSelectList(true,form, '/bu/releaseLine/getList', 'lineId',re.data.lineId,'line');
+                            initFunction.getSelectList(true,form, '/bu/carDriver/getList', 'driverId',re.data.driverId);
+                            initFunction.getSelectList(true,form, '/bu/carTransportRelease/getList?orgId='+re.data.orgId, 'orgId',re.data.goodsId);
+                            form.render();
+                        } else {
+                            layer.msg(re.msg);
+                        }
+                    }
+                });
+            }
+        }
+    });
+</script>
+</body>
+</html>

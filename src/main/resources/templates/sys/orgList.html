@@ -1,0 +1,67 @@
+<div class="layui-row layui-col-space10">
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-row">
+                <div class="layui-form layui-col-md12 my-search">
+                    <div class="layui-inline">
+                        <input type="text" name="currency" id="currency" placeholder="请输入查询信息" autocomplete="off" class="layui-input">
+                    </div>
+                    <button class="layui-btn" id="queryOrgList"><i class="layui-icon">&#xe615;</i>查询</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <table id="orgTable" lay-filter="org_table_filter"></table>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var url = '/org',
+        cols = [
+            [ //表头
+                {type: 'checkbox', fixed: 'left'}
+                /*, {field: 'id', title: 'ID', sort: true, fixed: 'left'}*/
+                , {field: 'name', title: '名称',}
+                , {field: 'orgType', title: '类型',}
+                , {field: 'province', title: '所在省',}
+                , {field: 'city', title: '所在市',}
+                , {field: 'county', title: '所在县区',}
+                /*, {field: 'address', title: '详细地址',}*/
+                , {field: 'industry', title: '所属行业',}
+                /*, {field: 'mainScope', title: '主营内容',}*/
+                , {field: 'linkMan', title: '联系人',}
+                , {field: 'phone', title: '企业电话',}
+                , {field: 'mobile', title: '手机号',}
+                /*, {field: 'website', title: '公司网站',}
+                , {field: 'idType', title: '证件类型',}
+                , {field: 'idNumber', title: '证件号码',}
+                , {field: 'joinedAssociation', title: '协会',}*/
+                , {field: 'createDate', title: '创建时间', sort: true}
+                , {field: 'opt', title: '操作', width: 180, fixed: 'right', toolbar: '#opt-btn', unresize: true}
+            ]
+        ],
+        title = '企业', prefix='org';
+
+    layui.$(function () {
+        setTimeout(function () {
+            initPage();
+        }, 300);
+
+        layui.$('#queryOrgList').click(function () {
+            var val = layui.$('#name').val();//获取输入框的值
+            initFunction.reloadTableList({name: val}, '/org/getList4Page', 'orgTable', 'GET');
+        });
+    });
+
+    function initPage() {
+        initFunction.initTable( prefix,url, cols);
+        initFunction.tableToolBarOnEvent(prefix,url, title);
+        initFunction.tableToolEvent(prefix,url, title);
+    }
+</script>

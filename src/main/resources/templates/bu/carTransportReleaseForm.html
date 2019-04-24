@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>车辆需求查看</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../../static/base/css/font.css">
+    <link rel="stylesheet" href="../../static/base/css/my.css">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="my-body">
+    <form class="layui-form" lay-filter="showForm">
+        <input type="hidden" name="id" id="id" value=""/>
+        <div class="layui-form-item">
+            <label for="org_id" class="layui-form-label">
+               车主
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="org_id" name="orgName" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="start_province" class="layui-form-label">
+                始发省
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="startProvinceName" id="start_province" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="start_city" class="layui-form-label">
+                始发市
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="startCityName" id="start_city" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="start_county" class="layui-form-label">
+                始发县
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="startCountyName" id="start_county" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="start_addr" class="layui-form-label">
+                始发地址
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="startAddr" id="start_addr" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                乡镇（街道）-村（社区）-楼号-门牌号
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="end_province" class="layui-form-label">
+                终点省
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="endProvinceName" id="end_province" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="end_city" class="layui-form-label">
+                终点市
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="endCityName" id="end_city" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="end_county" class="layui-form-label">
+                终点县
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="endCountyName" id="end_county" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="end_addr" class="layui-form-label">
+               终点地址
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="endAddr" id="end_addr" required="" lay-verify="required"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                乡镇（街道）-村（社区）-楼号-门牌号
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="departure_date" class="layui-form-label">
+                预计发车时间
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="departure_date" name="departureDate"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="departure_time" class="layui-form-label">
+                发车时段
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="departure_time" name="departureTime"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                如：10:00--13:00点
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="car_type" class="layui-form-label">
+                车型
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="car_type" name="carType" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="car_length" class="layui-form-label">
+                车长
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="car_length" name="carLength" required="" lay-verify="number|required"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                m
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="name" class="layui-form-label">
+                货品名称
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="name" name="name" required="" lay-verify="required|name"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="weight" class="layui-form-label">
+                货品重量
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="weight" name="weight" lay-verify="number"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">吨
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="volume" class="layui-form-label">
+                货品体积
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="volume" name="volume" lay-verify="number"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                m³
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="goods_packing" class="layui-form-label">
+                货品包装
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="goods_packing" name="goodsPacking"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="goods_spec" class="layui-form-label">
+                货品规格
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="goods_spec" name="goodsSpec"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="single_max_weight" class="layui-form-label">
+                单件最大重量
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="single_max_weight" name="singleMaxWeight" lay-verify="number"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                kg
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="single_spec" class="layui-form-label">
+                单件最大规格
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="single_spec" name="singleSpec"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="num" class="layui-form-label">
+                货物数量
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="num" name="num" lay-verify="number"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                个
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="val" class="layui-form-label">
+                货值
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="val" name="val" lay-verify="number"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                元
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="max_freight" class="layui-form-label">
+                最高运费
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="max_freight" name="maxFreight" lay-verify="number"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                元
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="time_limit" class="layui-form-label">
+                要求时限
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="time_limit" name="timeLimit"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="line_type" class="layui-form-label">
+                线路类型
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="line_type" name="lineTypeName"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                状态
+            </label>
+            <input type="radio" id="status1" name="status" value="1" title="启用">
+            <input type="radio" id="status0" name="status" value="0" title="禁用">
+        </div>
+    </form>
+</div>
+<script src="../../static/layui/layui.js" charset="utf-8"></script>
+<script src="../../static/base/js/common.js" charset="utf-8"></script>
+<script type="text/javascript">
+
+    layui.use(['jquery', 'form'], function () {
+        var $ = layui.jquery,
+            form = layui.form;
+
+        //页面初始化加载
+        $(function () {
+            setTimeout(function () {
+                frameVal();
+            }, 300);
+        });
+
+        function frameVal() {
+            var id = $('input[name="id"]').val();
+            if (id != undefined && id > 0) {
+                $.ajax({
+                    url:"/bu/carTransportRelease/getById?id=" + id,
+                    type: 'GET',
+                    dataType : "json",
+                    success: function (re) {
+                        if (re.code == 200) {
+                            form.val("showForm", re.data);
+//初始化前渲染所有默认值
+                            //渲染单选框
+                            var status = re.data.status;
+                            if (status != undefined && status > 0) {
+                                document.getElementById("status1").checked = true;
+                            } else {
+                                document.getElementById("status0").checked = true;
+                            }
+                            //下拉列表默认值
+                            initFunction.getSelectList(true,form,'/member/getList','org_id',re.data.orgId);
+                            initFunction.getDictSelectList(true,form,'CAR_TYPE' ,'car_type',re.data.carType);
+                            initFunction.getDictSelectList(true,form,'LINE_TYPE' ,'line_type',re.data.lineType);
+                            //时间处理
+                            initFunction.initLayDate('departure_date','yyyy-MM-dd');
+                            //区域下拉列表 省
+                            initFunction.getSelectAreaTree(true,form, 'start_province', {level: "1"}, re.data.startProvince);
+                            initFunction.getSelectAreaTree(true,form, 'start_city', {
+                                level: "2",
+                                pid: re.data.startProvince
+                            }, re.data.startCity);
+                            initFunction.getSelectAreaTree(true,form, 'start_county', {
+                                level: "3",
+                                pid: re.data.startCity
+                            }, re.data.startCounty);
+                            //区域下拉列表 省
+                            initFunction.getSelectAreaTree(true,form, 'end_province', {level: "1"}, re.data.endProvince);
+                            initFunction.getSelectAreaTree(true,form, 'end_city', {
+                                level: "2",
+                                pid: re.data.endProvince
+                            }, re.data.endCity);
+                            initFunction.getSelectAreaTree(true,form, 'end_county', {
+                                level: "3",
+                                pid: re.data.endCity
+                            }, re.data.endCounty);
+                            form.render();
+                        } else {
+                            layer.msg(re.msg);
+                        }
+                    }
+                });
+            }
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,76 @@
+<div class="layui-row layui-col-space10">
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-row">
+                <div class="layui-form layui-col-md12 my-search">
+                    <div class="layui-inline">
+                        <input type="text" name="currency" id="currency" placeholder="请输入查询信息" autocomplete="off" class="layui-input">
+                    </div>
+                    <button class="layui-btn" id="queryWarehouseList"><i class="layui-icon">&#xe615;</i>查询</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-md12">
+        <div class="layui-card">
+            <div class="layui-card-body">
+                <table id="warehouseTable" lay-filter="warehouse_table_filter"></table>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var url = '/bu/warehouse',
+        cols = [
+            [ //表头
+                {type: 'checkbox', fixed: 'left'}
+                , {field: 'memberName', title: '企业',}
+                , {field: 'orgName', title: '仓主',}
+                , {field: 'name', title: '仓库名称',}
+                , {field: 'warehouseTypeName', title: '仓库类型',}
+                , {field: 'area', title: '地区',}
+                , {field: 'totalArea', title: '总面积',}
+                , {field: 'canUse', title: '可用面积',}
+                , {field: 'warehouseHigh', title: '库高',}
+                , {field: 'warehouseFloor', title: '地坪',}
+                , {field: 'hasServiceName', title: '有仓配',}
+                , {field: 'createDate', title: '创建时间', sort: true}
+                , {field: 'opt', title: '操作', width: 230, fixed: 'right', toolbar: '#opts-btn', unresize: true}
+            ]
+        ]
+        ,
+        title = '仓库', prefix='warehouse';
+
+    layui.$(function () {
+        setTimeout(function () {
+            initPage();
+        }, 300);
+
+        layui.$('#queryWarehouseList').click(function () {
+            var val = layui.$('#name').val();//获取输入框的值
+            initFunction.reloadTableList({name: val}, '/warehouse/getList4Page', 'warehouseTable', 'GET');
+        });
+    });
+
+    function initPage() {
+        initFunction.initTable( prefix,url, cols);
+        initFunction.tableToolBarOnEvent(prefix,url, title);
+        initFunction.tableToolEvent(prefix,url, title);
+    }
+</script>
+<script type="text/html" id="opts-btn">
+    <button class="layui-btn layui-btn layui-btn-sm" value="查看" lay-event="btn_view">
+        <i class="layui-icon">&#xe615;</i>
+    </button>
+    <button class="layui-btn layui-btn layui-btn-sm" value="明细" lay-event="btn_view_detail">
+        <i class="layui-icon">&#xe656;</i>
+    </button>
+    <button class="layui-btn layui-btn-normal layui-btn-sm" value="编辑" lay-event="btn_edit">
+        <i class="layui-icon">&#xe642;</i>
+    </button>
+    <button class="layui-btn layui-btn-danger layui-btn-sm" value="删除" lay-event="btn_del">
+        <i class="layui-icon"></i>
+    </button>
+</script>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>仓库需求编辑</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../../static/layui/css/layui.css">
+    <link rel="stylesheet" href="../../static/base/css/font.css">
+    <link rel="stylesheet" href="../../static/base/css/my.css">
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="my-body">
+    <form class="layui-form" lay-filter="showForm">
+        <input type="hidden" name="id" id="id" value=""/>
+        <div class="layui-form-item">
+            <label for="orgId" class="layui-form-label">
+                货主
+            </label>
+            <div class="layui-input-inline">
+                <select name="orgId" id="orgId"   lay-filter="level-select" lay-verify="required">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="goodsType" class="layui-form-label">
+                <span class="we-red">*</span>货品类型
+            </label>
+            <div class="layui-input-inline">
+                <select name="goodsType" id="goodsType" lay-verify="required" lay-filter="level-select">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="goodsName" class="layui-form-label">
+                <span class="we-red">*</span>货品名称
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="goodsName" name="goodsName" required="" lay-verify="required|goodsName"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="operateType" class="layui-form-label">
+                运营类型
+            </label>
+            <div class="layui-input-inline">
+                <select name="operateType" id="operateType"   lay-filter="level-select">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="warehouseType" class="layui-form-label">
+                <span class="we-red">*</span>仓库类型
+            </label>
+            <div class="layui-input-inline">
+                <select name="warehouseType" id="warehouseType" lay-verify="required" lay-filter="level-select">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="province" class="layui-form-label">
+                <span class="we-red">*</span>省
+            </label>
+            <div class="layui-input-inline">
+                <select name="province" lay-verify="required" lay-filter="province" id="province">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="city" class="layui-form-label">
+                <span class="we-red">*</span>市
+            </label>
+            <div class="layui-input-inline">
+                <select name="city" lay-verify="required" id="city" lay-filter="city">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="county" class="layui-form-label">
+                <span class="we-red">*</span>县
+            </label>
+            <div class="layui-input-inline">
+                <select name="county"   id="county" lay-filter="county">
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="addressNeed" class="layui-form-label">
+                <span class="we-red">*</span>地理要求
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="addressNeed" id="addressNeed"    autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="useDate" class="layui-form-label">
+                <span class="we-red">*</span>起始日期
+            </label>
+            <div class="layui-input-inline">
+                <input class="layui-input" placeholder="起始日期" name="useDate"  lay-verify="required" id="useDate">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="endDate" class="layui-form-label">
+                <span class="we-red">*</span>截止日期
+            </label>
+            <div class="layui-input-inline">
+                <input class="layui-input" placeholder="截止日期" name="endDate"  lay-verify="required" id="endDate">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="needDesc" class="layui-form-label">
+                需求描述
+            </label>
+            <div class="layui-input-inline">
+                <textarea type="input" id="needDesc" name="needDesc"   autocomplete="off" class="layui-input"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="needService" class="layui-form-label">
+                仓配要求
+            </label>
+            <div class="layui-input-inline">
+                <textarea type="input" id="needService" name="needService"   autocomplete="off" class="layui-input"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="status1" class="layui-form-label">
+                <span class="we-red">*</span>状态
+            </label>
+            <input type="radio" id="status1" name="status" value="1" title="启用" >
+            <input type="radio" id="status0" name="status" value="0" title="禁用">
+        </div>
+        <div class="layui-form-item">
+            <label for="warehouseHigh" class="layui-form-label">
+                <span class="we-red">*</span>层高
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" name="warehouseHigh" id="warehouseHigh" lay-verify="number"
+                       autocomplete="off" class="layui-input">
+            </div>
+            <div class="layui-form-mid layui-word-aux">
+                m
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                温度达标
+            </label>
+            <input type="radio" name="isTemperature" value="2" title="未知" checked>
+            <input type="radio" name="isTemperature" value="1" title="达标" >
+            <input type="radio" name="isTemperature" value="0" title="不达标">
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                平台认证会员
+            </label>
+            <input type="radio" name="isAuth" value="0" title="非会员" checked>
+            <input type="radio" name="isAuth" value="1" title="会员">
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                是否有月台
+            </label>
+            <input type="radio" name="railwayPlatform" value="0" title="没有" checked>
+            <input type="radio" name="railwayPlatform" value="1" title="有">
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                温度达标
+            </label>
+            <input type="radio" name="isTemperature" value="1" title="达标">
+            <input type="radio" name="isTemperature" value="0" title="不达标" checked>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                升降地坪
+            </label>
+            <input type="radio" name="riseFall" value="1" title="有" >
+            <input type="radio" name="riseFall" value="0" title="没有" checked>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">
+                理货区
+            </label>
+            <input type="radio" name="operationArea" value="1" title="有" >
+            <input type="radio" name="operationArea" value="0" title="没有" checked>
+        </div>
+
+        <div class="layui-form-item">
+            <label for="remarks" class="layui-form-label">
+                其他需求
+            </label>
+            <div class="layui-input-inline">
+                <textarea type="input" id="remarks" name="remarks"   autocomplete="off" class="layui-input"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item" style="text-align: center;">
+            <button class="layui-btn" id="editForm" lay-filter="editForm" lay-submit="">保存</button>
+        </div>
+    </form>
+</div>
+<script src="../../static/layui/layui.js" charset="utf-8"></script>
+<script src="../../static/base/js/common.js" charset="utf-8"></script>
+<script type="text/javascript">
+
+    layui.use(['jquery', 'form', 'layer'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            layer = layui.layer;
+
+        //自定义验证规则
+        form.verify({
+            name: function (value, item) { //value：表单的值、item：表单的DOM对象
+                if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(value)) {
+                    return '用户名不能有特殊字符';
+                }
+                if (/(^\_)|(\__)|(\_+$)/.test(value)) {
+                    return '用户名首尾不能出现下划线\'_\'';
+                }
+                if (/^\d+\d+\d$/.test(value)) {
+                    return '用户名不能全为数字';
+                }
+            }
+        });
+
+        //页面初始化加载
+        $(function () {
+            setTimeout(function () {
+                frameVal();
+            }, 300);
+        });
+
+        function frameVal() {
+            var id = $('input[name="id"]').val();
+            if (id != undefined && id > 0) {
+                $.ajax({
+                    url: "/bu/warehouseNeed/getById?id=" + id,
+                    type: 'GET',
+                    dataType: "json",
+                    success: function (re) {
+                        if (re.code == 200) {
+                            form.val("showForm", re.data);
+                            //给状态重新渲染
+                            var status = re.data.status;
+                            if (status != undefined && status > 0) {
+                                document.getElementById("status1").checked = true;
+                            } else {
+                                document.getElementById("status0").checked = true;
+                            }
+                            initFunction.getSelectList(true,form,'/org/getList','orgId',re.data.orgId);//货主
+                            initFunction.getDictSelectList(true,form, 'WAREHOUSE_TYPE', 'warehouseType',re.data.warehouseType);
+                            initFunction.getDictSelectList(true,form, 'GOODS_TYPE', 'goodsType',re.data.goodsType);
+                            initFunction.initLayDate('useDate','yyyy-MM-dd');
+                            initFunction.initLayDate('endDate','yyyy-MM-dd');
+                            //区域下拉列表 省
+                            initFunction.getSelectAreaTree(true,form, 'province', {level: "1"}, re.data.province);
+                            initFunction.getSelectAreaTree(true,form, 'city', {
+                                level: "2",
+                                pid: re.data.province
+                            }, re.data.city);
+                            initFunction.getSelectAreaTree(true,form, 'county', {
+                                level: "3",
+                                pid: re.data.city
+                            }, re.data.county);
+                            form.render();
+                        } else {
+                            layer.msg(re.msg);
+                        }
+                    }
+                });
+            }
+        }
+
+        form.on('select(province)', function (data) {
+            initFunction.getSelectAreaTree(true,form, 'city', {level: "2", pid: data.value});
+            $("#county").empty();
+            $("#city").empty();
+        });
+
+        form.on('select(city)', function (data) {
+            initFunction.getSelectAreaTree(true,form, 'county', {level: "3", pid: data.value});
+            $("#county").empty();
+        });
+
+        //监听提交
+        form.on('submit(editForm)', function (data) {
+            $.ajax({
+                url: '/bu/warehouseNeed/save',
+                type: 'POST',
+                data: data.field,
+                dataType: "json",
+                success: function (result) {
+                    if (result.code == 200) {
+                        layer.msg('保存成功', {
+                            icon: 6,
+                            time: 1500
+                        }, function () {
+                            parent.layui.table.reload('warehouseNeedTable', {page: {curr: 1}});
+                            // 获得frame索引
+                            //关闭当前frame
+                            parent.layer.close(parent.layer.getFrameIndex(window.name));
+                        });
+                    } else {
+                        layer.msg(result.msg);
+                    }
+                }
+            });
+            return false;
+        });
+    });
+</script>
+</body>
+</html>
